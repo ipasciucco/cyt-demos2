@@ -1,0 +1,422 @@
+<mvc:View
+    controllerName="com.cyt.zuxportalesbase2021111116.controller.MasterView"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.f"
+	xmlns:cards="sap.f.cards"
+    xmlns:core="sap.ui.core"
+    xmlns:tnt="sap.tnt"
+    displayBlock="true"
+    xmlns="sap.m"
+    height="100%"
+>
+    
+    <ScrollContainer
+        height="100%"
+		width="100%"
+		vertical="true"
+		focusable="true"
+        horizontal="false"
+        class="fondoPrint">
+
+        
+
+        <l:VerticalLayout
+				width="100%"
+				class="gridWrapper">
+			<l:Grid
+                width="100%"
+                containerQuery="true"
+                vSpacing="0"         
+                defaultSpan="L12 M12 S12"
+                class="sapUiNoContentPadding">
+				
+				<html:div class="header">
+                    <HBox 
+                        class="languageList"
+                        justifyContent="End">
+                        <Link
+                            class="linkLang"
+                            text="EN"
+                            press="setLanguage('EN')" />
+                        <Link
+                            class="linkLang"
+                            text="ES"
+                            press="setLanguage('ES')" />
+                        <Link
+                            class="linkLang"
+                            text="PT"
+                            press="setLanguage('PT')" />
+                    </HBox>
+                </html:div>
+                <html:div>
+                    <HBox
+                        class="header"
+                        justifyContent="Center"
+                        alignContent="Center">
+                        <Image src="{settings>/appBaseUrl}/images/logo-cyt-corp.png" class="logoCYTHeader"/>
+                        
+                        
+                    </HBox>
+                </html:div>
+                
+                <html:div class="menu" id="menu">
+                    <tnt:ToolHeader id="toolHeaderMenu">
+
+                    </tnt:ToolHeader>
+                </html:div>
+
+                <!-- <html:div class="menu" id="menuClientes">
+                    <core:Fragment fragmentName="com.cyt.zuxportalesbase2021111116.view.MenuClientesExportacion" type="XML" />
+                </html:div> -->
+
+                <!-- <html:div class="menu" id="menuProv">
+                     <core:Fragment fragmentName="com.cyt.zuxportalesbase2021111116.view.MenuProveedores" type="XML" />
+                </html:div> -->
+
+                <!-- <html:div class="menu" id="menuPagoClientes">
+                     <Menu itemSelected="onMenuAction">
+                        <MenuItem text="{i18n>misDatos}" press="onLinkPress"  icon="sap-icon://travel-request"/>
+                        <MenuItem text="{i18n>cuentasporpagar}" press="onLinkPress" icon="sap-icon://list"/>
+                    </Menu>
+                </html:div> -->
+
+                <html:div class="cuerpoPortal">
+                    
+                    <core:ExtensionPoint name="extApp" >
+
+                        <html:div>
+                            <core:HTML content='&lt;video
+                                    id="banner" 
+                                    class="videoBanner"
+                                    autoplay="true" 
+                                    playsinline="true"
+                                    loop="true" 
+                                    muted="true"
+                                &gt;
+                                    &lt;source src="{settings>/appBaseUrl}/images/CyT_Web_1280x720_H264_BAJA.mp4" type="video/mp4"/&gt;
+                                &lt;/video&gt; '>
+                            </core:HTML>
+                        </html:div>
+                        
+                        <Panel id="seccionSociedades" visible="{portal>/portal/clientesExportacion}" expandable="false" expanded="true">
+                            <!-- <VBox >
+                                        <Label text="Display Name: {userModel>/decodedJWTToken/given_name} {userModel>/decodedJWTToken/family_name} ({userModel>/decodedJWTToken/user_id})"></Label>
+                                        <Label text="Email: {userModel>/decodedJWTToken/email}"></Label>
+                                        <Label text="First Name: {userModel>/decodedJWTToken/given_name}"></Label>
+                                        <Label text="Last Name: {userModel>/decodedJWTToken/family_name}"></Label>
+                            </VBox> -->
+                            <HBox justifyContent="Center" class="sapUiSmallMarginTop">
+                                <Title class="titulo size1" level="H3" text="{i18n>sociedadesVinculadas}" />
+                            </HBox>
+                            <l:VerticalLayout id="containerLayout" width="100%">
+                                <l:BlockLayout id="BlockLayout" background="{/selectedBackground}">
+                                    <l:BlockLayoutRow accentCells="Accent1">
+                                        <l:BlockLayoutCell width="5" visible="{societiesLinked>/C001/linked}">
+                                            <Image
+                                                class="imgLogo"
+                                                src="{settings>/appBaseUrl}/images/logos/logo-cyt.png"
+                                                densityAware="true"
+                                                width="150px"
+                                                />
+                                        </l:BlockLayoutCell>
+                                        <l:BlockLayoutCell width="5" visible="{societiesLinked>/C021/linked}">
+                                            <Image
+                                                class="imgLogo"
+                                                src="{settings>/appBaseUrl}/images/logos/logo-don-melchor.png"
+                                                densityAware="true"
+                                                width="150px"
+                                                />
+                                        </l:BlockLayoutCell>
+                                        <l:BlockLayoutCell width="5" visible="{societiesLinked>/C003/linked}">
+                                            <Image
+                                                class="imgLogo"
+                                                src="{settings>/appBaseUrl}/images/logos/logo-conosur.png"
+                                                densityAware="true"
+                                                width="150px"
+                                                />
+                                        </l:BlockLayoutCell>
+                                        <l:BlockLayoutCell width="5" visible="{societiesLinked>/C005/linked}">
+                                            <Image
+                                                class="imgLogo"
+                                                src="{settings>/appBaseUrl}/images/logos/logo-maipo.png"
+                                                densityAware="true"
+                                                width="150px"
+                                                />
+                                        </l:BlockLayoutCell>
+                                        <l:BlockLayoutCell width="5" visible="{societiesLinked>/C000/linked}"><!--Ver cual es el correcto-->
+                                            <Image
+                                                class="imgLogo"
+                                                src="{settings>/appBaseUrl}/images/logos/logo-almaviva.png"
+                                                densityAware="true"
+                                                width="150px"
+                                                />
+                                        </l:BlockLayoutCell>
+                                        <l:BlockLayoutCell width="5" visible="{societiesLinked>/C008/linked}">
+                                            <Image
+                                                class="imgLogo"
+                                                src="{settings>/appBaseUrl}/images/logos/logo-trivento.png"
+                                                densityAware="true"
+                                                width="150px"
+                                                />
+                                        </l:BlockLayoutCell>
+                                        <l:BlockLayoutCell width="5" visible="{societiesLinked>/C000/linked}"><!--Ver cual es el correcto-->
+                                            <Image
+                                                class="imgLogo"
+                                                src="{settings>/appBaseUrl}/images/logos/logo-fetzer.png"
+                                                densityAware="true"
+                                                width="150px"
+                                                />
+                                        </l:BlockLayoutCell>
+
+                                    </l:BlockLayoutRow>
+                                </l:BlockLayout>
+                            </l:VerticalLayout>
+                        </Panel>
+                    </core:ExtensionPoint>
+                </html:div>
+
+
+                <html:div Center="true">
+                
+                   
+                
+                </html:div>
+                
+                <html:div id="portalFooter">
+
+                    <l:VerticalLayout id="footerSociedades" width="100%" class="footerImages" visible="{portal>/portal/clientesExportacion}">
+                        <l:BlockLayout>
+                            <l:BlockLayoutRow accentCells="Accent1" >
+                                <l:BlockLayoutCell width="1" >
+                                    <Image
+                                        class="imgLogoFooter"
+                                        src="{settings>/appBaseUrl}/images/logos/logo-cytW.png"
+                                        densityAware="true"
+                                        />
+                                </l:BlockLayoutCell>
+                                <l:BlockLayoutCell width="1">
+                                    <Image
+                                        class="imgLogoFooter"
+                                        src="{settings>/appBaseUrl}/images/logos/logo-don-melchorW.png"
+                                        densityAware="true"
+                                        />
+                                </l:BlockLayoutCell>
+                                <l:BlockLayoutCell width="1">
+                                    <Image
+                                        class="imgLogoFooter"
+                                        src="{settings>/appBaseUrl}/images/logos/logo-conosurW.png"
+                                        densityAware="true"
+                                        />
+                                </l:BlockLayoutCell>
+                                <l:BlockLayoutCell width="1">
+                                    <Image
+                                        class="imgLogoFooter"
+                                        src="{settings>/appBaseUrl}/images/logos/logo-maipoW.png"
+                                        densityAware="true"
+                                        />
+                                </l:BlockLayoutCell>
+                                <l:BlockLayoutCell width="1">
+                                    <Image
+                                        class="imgLogoFooter"
+                                        src="{settings>/appBaseUrl}/images/logos/logo-almavivaW.png"
+                                        densityAware="true"
+                                        />
+                                </l:BlockLayoutCell>
+                                <l:BlockLayoutCell width="1">
+                                    <Image
+                                        class="imgLogoFooter"
+                                        src="{settings>/appBaseUrl}/images/logos/logo-triventoW.png"
+                                        densityAware="true"
+                                        />
+                                </l:BlockLayoutCell>
+                                <l:BlockLayoutCell width="1">
+                                    <Image
+                                        class="imgLogoFooter"
+                                        src="{settings>/appBaseUrl}/images/logos/logo-fetzerW.png"
+                                        densityAware="true"
+                                        />
+                                </l:BlockLayoutCell>
+                            </l:BlockLayoutRow>
+                        </l:BlockLayout>
+                    </l:VerticalLayout>
+
+
+                    <l:VerticalLayout width="100%" class="footerInfo" visible="{=!${portal>/portal/onlyPagoClientes}}">
+                        <l:BlockLayout>
+                            <l:BlockLayoutRow accentCells="Accent1">
+                                <l:BlockLayoutCell width="1">
+                                    <FlexBox alignItems="Center" width="100%">
+                                        <HBox width="100%" class="sapUiSmallMarginEnd" direction="Column">
+                                            <HBox>
+                                                <core:Icon
+                                                    src="sap-icon://world"
+                                                    class="size0"
+                                                    color="#FF5B35" >
+                                                </core:Icon>
+                                                <Link class="footerText size0 sapUiTinyMarginBegin" text="{i18n>sitioOficial}" href="https://vinacyt.com/" target="_blank"/>
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </HBox>
+                                            <HBox>
+                                                <core:Icon
+                                                    src="sap-icon://suitcase"
+                                                    class="size0"
+                                                    color="#FF5B35" >
+                                                </core:Icon>
+                                                
+                                                <Link class="footerText size0 sapUiTinyMarginBegin" text="{i18n>informacion}" href="https://vinacyt.com/informacion-legal/" target="_blank"/>
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </HBox>
+                                            <HBox>
+                                                <core:Icon
+                                                    src="sap-icon://email"
+                                                    class="size0"
+                                                    color="#FF5B35" >
+                                                </core:Icon>
+                                                <Link class="footerText size0 sapUiTinyMarginBegin" text="{i18n>contactanos}" href="mailto:sample@example.com"/>
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </HBox>
+                                            <HBox>
+                                                <Image 
+                                                    class="logolinkedin size0"
+                                                    src="{settings>/appBaseUrl}/images/linkedin.png"
+                                                />
+                                                <Link class="footerText size0 sapUiTinyMarginBegin" text="{i18n>linkedin}" href="https://www.linkedin.com/company/vinaconchaytoro/" target="_blank"/>
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </HBox>
+                                            <HBox visible="{portal>/portal/proveedores}">
+                                                <core:Icon
+                                                    src="sap-icon://official-service"
+                                                    class="size0"
+                                                    color="#FF5B35" >
+                                                </core:Icon>
+                                                <Link class="footerText size0 sapUiTinyMarginBegin" text="{i18n>politicaPrevencion}" press="descargarArchivo('PoliticaPrevencion')"/>
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </HBox>
+                                            <HBox visible="{portal>/portal/proveedores}">
+                                                <core:Icon
+                                                    src="sap-icon://official-service"
+                                                    class="size0"
+                                                    color="#FF5B35" >
+                                                </core:Icon>
+                                                <Link class="footerText size0 sapUiTinyMarginBegin" text="{i18n>codigoComportamiento}" press="descargarArchivo('CodigoProveedores')"/>
+                                                <layoutData>
+                                                    <FlexItemData growFactor="1" />
+                                                </layoutData>
+                                            </HBox>
+                                        </HBox>
+                                    </FlexBox>
+                                </l:BlockLayoutCell>
+                                <l:BlockLayoutCell width="1" class="footer">
+                                     <HBox
+                                        justifyContent="Center"
+                                        alignItems="Center"
+                                        >
+                                        <Image src="{settings>/appBaseUrl}/images/logo-cyt-white.png" class="logoCYTFooter" width="80%" height="80%"/>
+                                    </HBox>
+                                </l:BlockLayoutCell>
+                                <l:BlockLayoutCell width="1">
+                                    <Image 
+                                        class="imgLogoEmpresa"
+                                        src="{settings>/appBaseUrl}/images/2018-ec-logo-white.png"
+                                    />
+                                </l:BlockLayoutCell>
+                            </l:BlockLayoutRow>
+                        </l:BlockLayout>
+                    </l:VerticalLayout>
+
+                    <l:VerticalLayout width="100%" class="footerInfo" visible="{portal>/portal/onlyPagoClientes}">
+                        <l:BlockLayout>
+                            <l:BlockLayoutRow accentCells="Accent1">
+                                <l:BlockLayoutCell width="1" class="footer">
+                                     <HBox
+                                        justifyContent="Start"
+                                        alignItems="Start"
+                                        >
+                                        <Image src="{settings>/appBaseUrl}/images/logos/logo-VCT-chile.png" height="3rem" class="logoVCTChileFooter"/>
+                                    </HBox>
+                                </l:BlockLayoutCell>
+
+                                <l:BlockLayoutCell width="1" class="footer">
+                                </l:BlockLayoutCell>
+
+                                <l:BlockLayoutCell width="1">
+                                    <FlexBox alignItems="End" justifyContent="End" width="100%">
+                                        <VBox>
+
+                                            <VBox direction="Row">
+                                                <Image src="{settings>/appBaseUrl}/images/logo-cyt-white.png" height="3rem" class="logoVCyTPagos"/>
+                                                
+                                                <Image src="{settings>/appBaseUrl}/images/2018-ec-logo-white.png" height="3rem"/>
+                                            </VBox>
+                                            <HBox width="100%" class="sapUiSmallMarginEnd" direction="Column">
+                                                <HBox>
+                                                    <core:Icon
+                                                        src="sap-icon://world"
+                                                        class="size0"
+                                                        color="#FF5B35" >
+                                                    </core:Icon>
+                                                    <Link class="footerText size0 sapUiTinyMarginBegin" text="{i18n>sitioOficial}" href="https://vinacyt.com/" target="_blank"/>
+                                                    <layoutData>
+                                                        <FlexItemData growFactor="1" />
+                                                    </layoutData>
+                                                </HBox>
+                                                <HBox>
+                                                    <core:Icon
+                                                        src="sap-icon://suitcase"
+                                                        class="size0"
+                                                        color="#FF5B35" >
+                                                    </core:Icon>
+                                                    
+                                                    <Link class="footerText size0 sapUiTinyMarginBegin" text="{i18n>informacion}" href="https://vinacyt.com/informacion-legal/" target="_blank"/>
+                                                    <layoutData>
+                                                        <FlexItemData growFactor="1" />
+                                                    </layoutData>
+                                                </HBox>
+                                                <HBox>
+                                                    <core:Icon
+                                                        src="sap-icon://email"
+                                                        class="size0"
+                                                        color="#FF5B35" >
+                                                    </core:Icon>
+                                                    <Link class="footerText size0 sapUiTinyMarginBegin" text="{i18n>contactanos}" href="mailto:sample@example.com"/>
+                                                    <layoutData>
+                                                        <FlexItemData growFactor="1" />
+                                                    </layoutData>
+                                                </HBox>
+                                                <HBox>
+                                                    <Image 
+                                                        class="logolinkedin size0"
+                                                        src="{settings>/appBaseUrl}/images/linkedin.png"
+                                                    />
+                                                    <Link class="footerText size0 sapUiTinyMarginBegin" text="{i18n>linkedin}" href="https://www.linkedin.com/company/vinaconchaytoro/" target="_blank"/>
+                                                    <layoutData>
+                                                        <FlexItemData growFactor="1" />
+                                                    </layoutData>
+                                                </HBox>
+                                            </HBox>
+                                        </VBox>
+                                    </FlexBox>
+                                </l:BlockLayoutCell>
+                            </l:BlockLayoutRow>
+                        </l:BlockLayout>
+                    </l:VerticalLayout>
+                </html:div>
+  
+    		</l:Grid>
+		</l:VerticalLayout>
+                
+        
+    </ScrollContainer>
+</mvc:View>

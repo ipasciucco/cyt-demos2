@@ -1,0 +1,112 @@
+[
+    {
+        "title": "misDatos",
+        "icon": "sap-icon://business-by-design",
+        "rol": [
+            "Z_UX_LOGISTICA_PORTAL_PROVEEDORES_PROVEEDOR",
+            "Z_UX_LOGISTICA_PORTAL_PROVEEDORES_FACTORING"
+        ],
+        "action": {
+            "type": "External",
+            "link": "MisDatos",
+            "action": "Display"
+        }
+    },
+    {
+        "title": "documentos",
+        "icon": "sap-icon://sap-box",
+        "submenu": [
+            {
+                "title": "ordenesCompra",
+                "icon": "sap-icon://customer-order-entry",
+                "action": {
+                    "type": "External",
+                    "link": "OrdenesCompras",
+                    "action": "Display"
+                }
+            },
+            {
+                "title": "facturasPendientes",
+                "icon": "sap-icon://sales-order",
+                "action": {
+                    "type": "External",
+                    "link": "Facturas",
+                    "action": "Display"
+                }
+            },
+            {
+                "title": "historialDePagos",
+                "icon": "sap-icon://batch-payments",
+                "action": {
+                    "type": "External",
+                    "link": "HistorialPagos",
+                    "action": "Display"
+                }
+            }
+        ]
+    },
+    {
+        "title": "consultas",
+        "icon": "sap-icon://travel-request",
+        "action": {
+            "type": "External",
+            "link": "Consultas",
+            "action": "Display"
+        },
+        "rol": [
+            "Z_UX_LOGISTICA_PORTAL_PROVEEDORES_PROVEEDOR",
+            "Z_UX_LOGISTICA_PORTAL_PROVEEDORES_FACTORING",
+            "Z_UX_LOGISTICA_PORTAL_PROVEEDORES_ADMIN"
+        ]
+    },
+    {
+        "title": "transportManagement",
+        "icon": "sap-icon://shipping-status",
+        "action": {
+            "type": "External",
+            "link": "TMProveedores",
+            "action": "Display"
+        },
+        "rol": [
+            "Z_UX_LOGISTICA_PORTAL_PROVEEDORES_TM"
+        ]
+    },
+    {
+        "title": "estadisticas",
+        "icon": "sap-icon://bbyd-dashboard",
+        "action": {
+            "type": "External",
+            "link": "Estadisticas",
+            "action": "Display"
+        },
+        "rol": [
+            "Z_UX_LOGISTICA_PORTAL_PROVEEDORES_ADMIN",
+            "Z_UX_LOGISTICA_PORTAL_PROVEEDORES_INTERNOS"
+        ]
+    },
+    {
+        "title": "users",
+        "icon": "sap-icon://collaborate",
+        "action": {
+            "type": "External",
+            "link": "Factorings",
+            "action": "Display"
+        },
+        "rol": [
+            "Z_UX_LOGISTICA_PORTAL_PROVEEDORES_ADMIN",
+            "Z_UX_LOGISTICA_PORTAL_PROVEEDORES_CUENTAS_X_PAGAR"
+        ]
+    },
+    {
+        "title": "comunicaciones",
+        "icon": "sap-icon://marketing-campaign",
+        "action": {
+            "type": "External",
+            "link": "Comunicaciones",
+            "action": "Display"
+        },
+        "rol": [
+            "Z_UX_LOGISTICA_PORTAL_PROVEEDORES_ADMIN"
+        ]
+    }
+]

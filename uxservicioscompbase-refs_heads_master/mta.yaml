@@ -1,0 +1,94 @@
+_schema-version: "3.2"
+ID: com-cyt-zuxportalesbase2021111116
+description: Portales Concha y Toro
+version: 0.0.1
+modules:
+- name: com-cyt-zuxportalesbase2021111116-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: com-cyt-zuxportalesbase2021111116-dest-srv
+    parameters:
+      content-target: true
+  - name: com-cyt-zuxportalesbase2021111116-repo-host
+    parameters:
+      service-key:
+        name: com-cyt-zuxportalesbase2021111116-repo-host-key
+  - name: com-cyt-zuxportalesbase2021111116-uaa
+    parameters:
+      service-key:
+        name: com-cyt-zuxportalesbase2021111116-uaa-key
+  parameters:
+    content:
+      subaccount:
+        destinations:
+        - Name: com-cyt-zuxportalesbase2021111116_repo_host
+          ServiceInstanceName: com-cyt-zuxportalesbase2021111116-html5-srv
+          ServiceKeyName: com-cyt-zuxportalesbase2021111116-repo-host-key
+          sap.cloud.service: com-cyt-zuxportalesbase2021111116
+        - Authentication: OAuth2UserTokenExchange
+          Name: com-cyt-zuxportalesbase2021111116_uaa
+          ServiceInstanceName: com-cyt-zuxportalesbase2021111116-xsuaa-srv
+          ServiceKeyName: com-cyt-zuxportalesbase2021111116-uaa-key
+          sap.cloud.service: com-cyt-zuxportalesbase2021111116
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: com-cyt-zuxportalesbase2021111116-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: com-cyt-zuxportalesbase2021111116-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comcytzuxportalesbase2021111116.zip
+      name: comcytzuxportalesbase2021111116
+      target-path: resources/
+- name: comcytzuxportalesbase2021111116
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: com-cyt-zuxportalesbase2021111116-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: com-cyt-zuxportalesbase2021111116-dest-srv
+    service-plan: lite
+- name: com-cyt-zuxportalesbase2021111116-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: com-cyt-zuxportalesbase2021111116-xsuaa-srv
+    service-plan: application
+- name: com-cyt-zuxportalesbase2021111116-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: com-cyt-zuxportalesbase2021111116-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true

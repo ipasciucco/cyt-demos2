@@ -1,0 +1,777 @@
+<mvc:View
+    controllerName="com.cyt.zmmportalproveedoresfacturas2021111116.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    width="100%"
+    xmlns:t="sap.ui.table"
+>
+    <IconTabBar
+    id="tabbar1"
+    select=".handleIconTabBarSelect"
+    headerBackgroundDesign="Transparent"
+    class="sapUiResponsiveContentPadding sapUiSmallMarginBegin">
+        <items>
+
+            <IconTabFilter text="{i18n>contabilizadas}" key="closed">
+
+                <fb:FilterBar reset="onReset" search="searchFacturasContabilizadas" showRestoreButton="true" showClearButton="true">
+                    <fb:filterGroupItems>
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="B2" label="{i18n>referencia}"  partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <Input type="Text" value="{/filtrosFacturasCont/Referencia}" submit="searchFacturasContabilizadas"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="A" label="{i18n>sociedad}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <ComboBox
+                                    items="{ path: '/SociedadesCollection' }"
+                                    selectedKey="{/filtrosFacturasCont/Sociedad}"  
+                                    change="searchFacturasContabilizadas">
+                                    <core:Item key="{Code}" text="{Desc_1}" />
+                                </ComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="G" label="{i18n>proveedor}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <MultiInput
+                                    id="multiInputProvC"
+                                    suggestionItems="{ path: '/ProveedorCollection' }"
+                                    valueHelpRequest="handleValueHelpProveedores"
+                                    tokenUpdate="changeTokensCont"
+                                    valueHelpOnly="true">
+                                    <core:Item key="{Code}" text="{Desc_1}" />
+                                </MultiInput>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="D" label="{i18n>claseDocumento}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <ComboBox
+                                    items="{ path: '/ClasesDocCollection' }"
+                                    selectedKey="{/filtrosFacturasCont/ClaseDocumento}"  
+                                    change="searchFacturasContabilizadas">
+                                    <core:Item key="{Code}" text="{Desc_1}" />
+                                </ComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="B" label="{i18n>fechaDocDesde}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <DatePicker value="{/filtrosFacturasCont/FechaDesde}" minDate="{/filtrosFacturasCont/minimumDate}" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" change="searchFacturasContabilizadas"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                        
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="C" label="{i18n>fechaDocHasta}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <DatePicker value="{/filtrosFacturasCont/FechaHasta}" minDate="{/filtrosFacturasCont/minimumDate}" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" change="searchFacturasContabilizadas"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                        
+                        <fb:FilterGroupItem id="statusFilte2r" groupName="G1" groupTitle="Group1" name="B1" label="{i18n>pagoDesde}">
+                            <fb:control>
+                                <DatePicker value="{/filtrosFacturasCont/PagoDesde}" minDate="{/filtrosFacturasCont/minimumDate}" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" change="searchFacturasContabilizadas"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem groupName="G2" groupTitle="Group2" name="A2" label="{i18n>pagoHasta}" labelTooltip="Tooltip GroupItem Example">
+                            <fb:control>
+                                <DatePicker value="{/filtrosFacturasCont/PagoHasta}" minDate="{/filtrosFacturasCont/minimumDate}" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" change="searchFacturasContabilizadas"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        
+                        <fb:FilterGroupItem groupName="G2" groupTitle="Group2" name="C2" label="{i18n>bloqueada}" labelTooltip="Tooltip GroupItem Example">
+                            <fb:control>
+                                <ComboBox
+                                    selectedKey="{/filtrosFacturasCont/Bloqueada}"  
+                                    change="searchFacturasContabilizadas">
+                                    <core:Item text="{i18n>todas}" key="A"></core:Item>
+                                    <core:Item text="{i18n>bloqueadas}" key="S"></core:Item>
+                                    <core:Item text="{i18n>noBloqueadas}" key="N"></core:Item>
+                                </ComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                        
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
+
+                <IconTabBar
+                    select=".handleIconTabBarSelect"
+                    headerBackgroundDesign="Transparent"
+                    class="sapUiResponsiveContentPadding sapUiSmallMarginBegin" >
+                    <items>
+                        <IconTabFilter text="{i18n>pagas}" key="open" >
+                        
+                            <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                focusable="true">
+                                <Table id="tableFacturas"
+                                    inset="false"
+                                    items="{factCont>/FacturasC}"
+                                    alternateRowColors="true"
+                                    >
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <content>
+                                                <Title text="{i18n>facturas}" level="H2"/>
+                                                <ToolbarSpacer />
+                                                <core:Icon
+                                                    src="sap-icon://excel-attachment"
+                                                    size="26px"
+                                                    color="#229954" 
+                                                    press="onExportFacturasContC"
+                                                    >
+                                                </core:Icon>    
+                                                
+                                            </content>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="7em">
+                                            <Text text="{i18n>referencia}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>sociedad}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>RUT}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>proveedor}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>claseDocumento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            width="12em">
+                                            <Text text="{i18n>viaPago}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="15em">
+                                            <Text text="{i18n>condicionPago}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="10em"
+                                            hAlign="Center">
+                                            <Text text="{i18n>bloqueadaPago}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            visible="{/isProveedor}"
+                                            width="12em">
+                                            <Text text="{i18n>beneficiarioFinal}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="7em">
+                                            <Text text="{i18n>fechaDocumento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="7em">
+                                            <Text text="{i18n>fechaPago}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="6em">
+                                            <Text text="{i18n>moneda}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="8em"
+                                            hAlign="Right">
+                                            <Text text="{i18n>importe}" />
+                                        </Column>
+                                          <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="8em"
+                                            hAlign="Right">
+                                            <Text text="Invoice" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem 
+                                            vAlign="Middle" 
+                                            press=".handleTableSelectDialogPress"
+                                            >
+                                            <cells>
+                                                <ObjectIdentifier
+                                                    title="{path: 'factCont>Referencia', formatter: '.formatter.invoiceNumber'}" />
+                                                <Text
+                                                    text="{factCont>SociedadDesc}" />
+                                                <Text
+                                                    text="{factCont>RUT}" />
+                                                <Text
+                                                    text="{factCont>NombreProv}" />
+                                                <Text
+                                                    text="{factCont>ClaseDocDesc}" />
+                                                <Text
+                                                    text="{factCont>ViaPagoDesc}" />
+                                                <Text
+                                                    text="{factCont>CondicionPagoDesc}" />
+                                                <Text
+                                                    text="{path: 'factCont>BloqueadaPago', formatter: '.formatter.blockedText'}" />
+                                                <Text
+                                                    text="{factCont>NombreBenef} - {factCont>Beneficiario}" />
+                                                <Text
+                                                    text="{factCont>FechaDoc}" />
+                                                <Text
+                                                    text="{factCont>FechaPago}" />
+                                                <Text
+                                                    text="{factCont>Moneda}" />
+                                                <Text
+                                                    text="{ parts:[{path: 'factCont>Monto'} , {path: 'factCont>Moneda'}], formatter: '.formatter.numberDots'}" />
+                                                <core:Icon
+                                                    src="sap-icon://detail-view"
+                                                    size="20px"
+                                                    color="#0a6ed1" 
+                                                    press="onOpenOrdenCompraService">
+                                                </core:Icon>
+                                            </cells>
+                                        </ColumnListItem>        
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                            <OverflowToolbar>
+                                <content>
+                                    <ToolbarSpacer/>
+                                    <Button id="loadMoreFactContC" text="{i18n>loadMore}" press="loadFactContC" />
+                                    <ToolbarSpacer/>
+                                </content>
+                            </OverflowToolbar>
+                        </IconTabFilter>
+                        <IconTabFilter text="{i18n>pendientes}" key="open">
+                            <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                focusable="true">
+                                <Table id="tableFacturasP"
+                                    inset="false"
+                                    items="{factCont>/FacturasP}"
+                                    alternateRowColors="true"
+                                    >
+                                    <infoToolbar>
+                                        <OverflowToolbar>
+                                            <Label text="{i18n>messagePayDay}"/>
+                                        </OverflowToolbar>
+                                    </infoToolbar>
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <content>
+                                                <Title text="{i18n>facturas}" level="H2"/>
+                                                <ToolbarSpacer />
+                                                <core:Icon
+                                                    src="sap-icon://excel-attachment"
+                                                    size="26px"
+                                                    color="#229954" 
+                                                    press="onExportFacturasContP"
+                                                    >
+                                                </core:Icon>
+                                            </content>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="7em">
+                                            <Text text="{i18n>referencia}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>sociedad}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>RUT}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="12em">
+                                            <Text text="{i18n>proveedor}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>claseDocumento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            width="10em">
+                                            <Text text="{i18n>viaPago}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>condicionPago}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="10em"
+                                            hAlign="Center">
+                                            <Text text="{i18n>bloqueadaPago}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            visible="{/isProveedor}"
+                                            width="12em">
+                                            <Text text="{i18n>beneficiarioFinal}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="7em">
+                                            <Text text="{i18n>fechaDocumento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="7em">
+                                            <Text text="{i18n>fechaVencimiento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="8em">
+                                            <Text text="{i18n>moneda}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="8em"
+                                            hAlign="Right">
+                                            <Text text="{i18n>importe}" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem 
+                                            vAlign="Middle" 
+                                            press=".handleTableSelectDialogPress"
+                                            >
+                                            <cells>
+                                                <ObjectIdentifier
+                                                    title="{path: 'factCont>Referencia', formatter: '.formatter.invoiceNumber'}" />
+                                                <Text
+                                                    text="{factCont>SociedadDesc}" />
+                                                <Text
+                                                    text="{factCont>RUT}" />
+                                                <Text
+                                                    text="{factCont>NombreProv}" />
+                                                <Text
+                                                    text="{factCont>ClaseDocDesc}" />
+                                                <Text
+                                                    text="{factCont>ViaPagoDesc}" />
+                                                <Text
+                                                    text="{factCont>CondicionPagoDesc}" />
+                                                <Text
+                                                    text="{path: 'factCont>BloqueadaPago', formatter: '.formatter.blockedText'}" />
+                                                <Text
+                                                    text="{factCont>NombreBenef} - {factCont>Beneficiario}" visible="{/isProveedor}" />
+                                                <Text
+                                                    text="{factCont>FechaDoc}" />
+                                                <Text
+                                                    text="{factCont>FechaPago}" />
+                                                <Text
+                                                    text="{factCont>Moneda}" />
+                                                <Text
+                                                    text="{ parts:[{path: 'factCont>Monto'} , {path: 'factCont>Moneda'}], formatter: '.formatter.numberDots'}" />
+                                            </cells>
+                                        </ColumnListItem>        
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                            <OverflowToolbar>
+                                <content>
+                                    <ToolbarSpacer/>
+                                    <Button id="loadMoreFactContP" text="{i18n>loadMore}" press="loadFactContP" />
+                                    <ToolbarSpacer/>
+                                </content>
+                            </OverflowToolbar>
+                        </IconTabFilter>
+                    </items>
+                </IconTabBar>
+            </IconTabFilter>
+
+            <IconTabFilter text="{i18n>noContabilizadas}" key="open">
+
+                <fb:FilterBar reset="onReset" search="searchFacturasNoCont" showRestoreButton="true" showClearButton="true">
+                    <fb:filterGroupItems>
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="A" label="{i18n>sociedad}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <ComboBox
+                                    items="{ path: '/SociedadesCollection' }"
+                                    selectedKey="{/filtrosFacturasNoCont/Sociedad}"  
+                                    change="searchFacturasNoCont">
+                                    <core:Item key="{Code}" text="{Desc_1}" />
+                                </ComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+            
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="D" label="{i18n>numeroFactura}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <Input value="{/filtrosFacturasNoCont/Factura}" type="Text" placeholder="{i18n>numeroFactura}" submit="searchFacturasNoCont" />
+                            </fb:control>
+                        </fb:FilterGroupItem>
+            
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="G" label="{i18n>proveedor}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <MultiInput
+                                    id="multiInputProvNC"
+                                    suggestionItems="{ path: '/ProveedorCollection' }"
+                                    valueHelpRequest="handleValueHelpProveedores"
+                                    tokenUpdate="changeTokensNoCont"
+                                    valueHelpOnly="true">
+                                    <core:Item key="{Code}" text="{Desc_1}" />
+                                </MultiInput>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="X" label="{i18n>claseDocumento}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <ComboBox
+                                    items="{ path: '/ClasesDocCollection' }"
+                                    selectedKey="{/filtrosFacturasNoCont/ClaseDocumento}"  
+                                    change="searchFacturasNoCont">
+                                    <core:Item key="{Code}" text="{Desc_1}" />
+                                </ComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="E" label="{i18n>estado}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <ComboBox selectedKey="{/filtrosFacturasNoCont/Estado}" change="searchFacturasNoCont">
+                                    <core:Item text="Todos" key="T"></core:Item>
+                                    <core:Item text="Pendiente de acuse" key=" "></core:Item>
+                                    <core:Item text="Aprobado por SII" key="A"></core:Item>
+                                    <core:Item text="Reclamada en SII" key="R"></core:Item>
+                                </ComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                        
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="B" label="{i18n>fechaEmisionDesde}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <DatePicker value="{/filtrosFacturasNoCont/EmisionDesde}" minDate="{/filtrosFacturasNoCont/minimumDate}" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" change="searchFacturasNoCont"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                        
+                        <fb:FilterGroupItem groupName="__$INTERNAL$" name="C" label="{i18n>fechaEmisionHasta}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                            <fb:control>
+                                <DatePicker value="{/filtrosFacturasNoCont/EmisionHasta}" minDate="{/filtrosFacturasNoCont/minimumDate}" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" change="searchFacturasNoCont"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                        
+                        
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
+
+                <IconTabBar
+                    select=".handleIconTabBarSelect"
+                    headerBackgroundDesign="Transparent"
+                    class="sapUiResponsiveContentPadding sapUiSmallMarginBegin">
+                    <items>
+                        <IconTabFilter text="{i18n>proveedores}" key="open">                           
+
+                            <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                focusable="true">
+                                <Table id="tableNoContProveedores"
+                                    inset="false"
+                                    items="{factNoCont>/FacturasProv}"
+                                    alternateRowColors="true"
+                                    >
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <content>
+                                                <Title text="{i18n>facturas}" level="H2"/>
+                                                <ToolbarSpacer />
+                                                <core:Icon
+                                                    src="sap-icon://excel-attachment"
+                                                    size="26px"
+                                                    color="#229954" 
+                                                    press="onExportFacturasProv"
+                                                    >
+                                                </core:Icon>
+                                            </content>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="8em">
+                                            <Text text="{i18n>nroFactura}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>sociedad}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>RUT}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="12em">
+                                            <Text text="{i18n>proveedor}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>claseDocumento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="8em">
+                                            <Text text="{i18n>fechaEmision}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="8em">
+                                            <Text text="{i18n>fechaRecepcion}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>estado}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="12em">
+                                            <Text text="{i18n>estadoDocumento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="8em">
+                                            <Text text="{i18n>moneda}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            hAlign="Right"
+                                            width="12em">
+                                            <Text text="{i18n>monto}" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem 
+                                            vAlign="Middle" 
+                                            press=".handleTableSelectDialogPress"
+                                            >
+                                            <cells>
+                                                <ObjectIdentifier
+                                                    title="{path: 'factNoCont>Factura', formatter: '.formatter.invoiceNumber'}" />
+                                                <Text text="{factNoCont>SociedadDesc}" />
+                                                <Text text="{factNoCont>RUT}" />
+                                                <Text text="{factNoCont>NombreProv}" />
+                                                <Text text="{factNoCont>ClaseDocDesc}" />
+                                                <Text text="{factNoCont>FechaEmision}" />
+                                                <Text text="{factNoCont>FechaRecepcion}" />
+                                                <Text text="{path:'factNoCont>Estado', formatter:'.formatter.statusText'}" />
+                                                <Text text="{factNoCont>EstadoDoc}" />
+                                                <Text text="{factNoCont>Moneda}" />
+                                                <Text text="{ parts:[{path: 'factNoCont>Monto'} , {path: 'factNoCont>Moneda'}], formatter: '.formatter.numberDots'}" />
+                                            </cells>
+                                        </ColumnListItem>        
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                            <OverflowToolbar>
+                                <content>
+                                    <ToolbarSpacer/>
+                                    <Button id="loadMoreProveedores" text="{i18n>loadMore}" press="loadFactProv" />
+                                    <ToolbarSpacer/>
+                                </content>
+                            </OverflowToolbar>
+                        </IconTabFilter>
+                        <IconTabFilter text="{i18n>factoring}" key="closed" visible="{/isFactoring}">
+                            <ScrollContainer
+                                height="100%"
+                                width="100%"
+                                horizontal="true"
+                                focusable="true">
+                                <Table id="tableNoContFactoring"
+                                    inset="false"
+                                    items="{factNoCont>/FacturasFact}"
+                                    alternateRowColors="true"
+                                    >
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <content>
+                                                <Title text="{i18n>facturas}" level="H2"/>
+                                                <ToolbarSpacer />
+                                                <core:Icon
+                                                    src="sap-icon://excel-attachment"
+                                                    size="26px"
+                                                    color="#229954" 
+                                                    press="onExportFacturasFact"
+                                                    >
+                                                </core:Icon>
+                                            </content>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="8em">
+                                            <Text text="{i18n>nroFactura}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>sociedad}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>RUT}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="12em">
+                                            <Text text="{i18n>proveedor}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>claseDocumento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="8em">
+                                            <Text text="{i18n>fechaEmision}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="8em">
+                                            <Text text="{i18n>fechaRecepcion}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>estado}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="12em">
+                                            <Text text="{i18n>estadoDocumento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="8em">
+                                            <Text text="{i18n>moneda}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            hAlign="Right"
+                                            width="10em">
+                                            <Text text="{i18n>monto}" />
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem 
+                                            vAlign="Middle" 
+                                            press=".handleTableSelectDialogPress"
+                                            >
+                                            <cells>
+                                                <ObjectIdentifier
+                                                    title="{path: 'factNoCont>Factura', formatter: '.formatter.invoiceNumber'}" />
+                                                <Text text="{factNoCont>SociedadDesc}" />
+                                                <Text text="{factNoCont>RUT}" />
+                                                <Text text="{factNoCont>NombreProv}" />
+                                                <Text text="{factNoCont>ClaseDocDesc}" />
+                                                <Text text="{factNoCont>FechaEmision}" />
+                                                <Text text="{factNoCont>FechaRecepcion}" />
+                                                <Text text="{path:'factNoCont>Estado', formatter:'.formatter.statusText'}" />
+                                                <Text text="{factNoCont>EstadoDoc}" />
+                                                <Text text="{factNoCont>Moneda}" />
+                                                <Text text="{ parts:[{path: 'factNoCont>Monto'} , {path: 'factNoCont>Moneda'}], formatter: '.formatter.numberDots'}" />
+                                  
+                                            </cells>
+                                        </ColumnListItem>        
+                                    </items>
+                                </Table>
+                            </ScrollContainer>
+                            <OverflowToolbar>
+                                <content>
+                                    <ToolbarSpacer/>
+                                    <Button id="loadMoreFactoring" text="{i18n>loadMore}" press="loadFactFact" />
+                                    <ToolbarSpacer/>
+                                </content>
+                            </OverflowToolbar>
+                        </IconTabFilter>
+                    </items>
+                </IconTabBar>
+            </IconTabFilter>
+            
+        </items>
+    </IconTabBar>
+
+</mvc:View>

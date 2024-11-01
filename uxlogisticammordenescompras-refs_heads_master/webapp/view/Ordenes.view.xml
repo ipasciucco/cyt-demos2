@@ -1,0 +1,555 @@
+<mvc:View
+    controllerName="com.cyt.zmmportalproveedoresordenescompras2021111116.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    width="100%"
+    xmlns:t="sap.ui.table"
+>
+               
+    <html:div>
+        <IconTabBar
+            id="tabbar1"
+            select=".handleIconTabBarSelect"
+            headerBackgroundDesign="Transparent"
+            class="sapUiResponsiveContentPadding sapUiSmallMarginBegin">
+            <items>
+                <IconTabFilter text="{i18n>materiales}" key="open">
+
+                    <fb:FilterBar reset="_clearModelMateriales" search="searchMateriales" showRestoreButton="true" showClearButton="true">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="A22" label="{i18n>sociedad}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <ComboBox
+                                        items="{ path: '/SociedadesCollection' }"
+                                        value="{/filtrosMateriales/Sociedad}" 
+                                        change="searchMateriales" >
+                                        <core:Item key="{Desc_1}" text="{Desc_1}" />
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="G" label="{i18n>proveedor}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput
+                                        id="multiInputProvM"
+                                        suggestionItems="{ path: '/ProveedorCollection' }"
+                                        tokenUpdate="changeTokensMateriales"
+                                        valueHelpRequest="handleValueHelpProveedores"
+                                        valueHelpOnly="true">
+                                        <core:Item key="{Code}" text="{Desc_1}" />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="D" label="{i18n>pedido}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <Input value="{/filtrosMateriales/Pedido}" type="Text" placeholder="{i18n>pedido}"  submit="searchMateriales"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="E" label="{i18n>material}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <Input value="{/filtrosMateriales/Material}" type="Text" placeholder="{i18n>material}" submit="searchMateriales"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="B" label="{i18n>desde}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <DatePicker value="{/filtrosMateriales/Desde}" minDate="{/filtrosMateriales/minimumDate}" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" change="searchMateriales"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="C" label="{i18n>hasta}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <DatePicker value="{/filtrosMateriales/Hasta}" minDate="{/filtrosMateriales/minimumDate}" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" change="searchMateriales"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+
+                    <IconTabBar
+                        headerBackgroundDesign="Transparent"
+                        class="sapUiResponsiveContentPadding sapUiSmallMarginBegin">
+                        <items>
+                            <IconTabFilter text="{i18n>pendientes}" key="open">
+                                <Table id="ocMateriales"
+                                    inset="false"
+                                    items="{ocMaterialesPendientes>/ocMaterialesPendientes}"
+                                    alternateRowColors="true"
+                                    contextualWidth="Auto"
+                                    >
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <content>
+                                                <Title text="" level="H2"/>
+                                                <ToolbarSpacer />
+                                                <core:Icon
+                                                    src="sap-icon://excel-attachment"
+                                                    size="26px"
+                                                    color="#229954" 
+                                                    press="onExportMaterial"
+                                                    >
+                                                </core:Icon>
+                                            </content>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column
+                                            minScreenWidth="Small"
+                                            demandPopin="true"
+                                            width="12em">
+                                            <Text text="{i18n>nroOrden}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Small"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>fechaDocumento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Small"
+                                            demandPopin="true"
+                                            width="auto">
+                                            <Text text="{i18n>proveedor}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="20em">
+                                            <Text text="{i18n>sociedad}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Small"
+                                            demandPopin="true"
+                                            hAlign="End"
+                                            width="4rem">
+                                            
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem 
+                                            vAlign="Middle" 
+                                            type="Navigation"
+                                            press=".handleTableSelectDialogPress"
+                                            >
+                                            <cells>
+                                                <ObjectIdentifier
+                                                    title="{= parseInt(${ocMaterialesPendientes>Orden})}" />
+                                                <Text
+                                                    text="{ocMaterialesPendientes>Fecha}" />
+                                                <Text
+                                                    text="{ocMaterialesPendientes>NombreProv}" />
+                                                <Text
+                                                    text="{ocMaterialesPendientes>Soc_text}" />
+                                                <core:Icon
+                                                    src="sap-icon://detail-view"
+                                                    size="20px"
+                                                    color="#0a6ed1" 
+                                                    press="onOpenOrdenCompra">
+                                                </core:Icon>
+                                            </cells>
+                                        </ColumnListItem>
+                                        
+                                    </items>
+                                </Table>
+                                <OverflowToolbar>
+                                    <content>
+                                        <ToolbarSpacer/>
+                                        <Button id="loadMorePendientes" text="{i18n>loadMore}" press="loadPendientes" />
+                                        <ToolbarSpacer/>
+                                    </content>
+                                </OverflowToolbar>
+                            </IconTabFilter>
+                            <IconTabFilter text="{i18n>historial}" key="closed">
+                            <Table id="tableOCMaterialesHistorial"
+                                    inset="false"
+                                    items="{ocMateriales>/ocMateriales}"
+                                    alternateRowColors="true"
+                                    >
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <content>
+                                                <Title text="" level="H2"/>
+                                                <ToolbarSpacer />
+                                                <core:Icon
+                                                    src="sap-icon://excel-attachment"
+                                                    size="26px"
+                                                    color="#229954" 
+                                                    press="onExportHistorial"
+                                                    >
+                                                    
+                                                </core:Icon>
+                                            </content>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                    <Column
+                                            minScreenWidth="Small"
+                                            demandPopin="true"
+                                            width="12em">
+                                            <Text text="{i18n>nroOrden}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Small"
+                                            demandPopin="true"
+                                            width="10em">
+                                            <Text text="{i18n>fechaDocumento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Small"
+                                            demandPopin="true"
+                                            width="auto">
+                                            <Text text="{i18n>proveedor}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="20em">
+                                            <Text text="{i18n>sociedad}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Small"
+                                            demandPopin="true"
+                                            hAlign="End">
+                                            
+                                        </Column>
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem 
+                                            vAlign="Middle" 
+                                            type="Navigation"
+                                            press=".handleTableSelectDialogPressHistorial"
+                                            >
+                                            <cells>
+                                            <ObjectIdentifier
+                                                    title="{= parseInt(${ocMateriales>Orden})}" />
+                                                <Text
+                                                    text="{ocMateriales>Fecha}" />
+                                                <Text
+                                                    text="{ocMateriales>NombreProveedor}" />    
+                                                <Text
+                                                    text="{ocMateriales>Soc_text}" />
+                                                <core:Icon
+                                                    src="sap-icon://detail-view"
+                                                    size="20px"
+                                                    color="#0a6ed1" 
+                                                    press="onOpenOrdenCompraHistorico">
+                                                </core:Icon>
+
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
+                                </Table>
+                                <OverflowToolbar>
+                                    <content>
+                                        <ToolbarSpacer/>
+                                        <Button id="loadMoreHistorico" text="{i18n>loadMore}" press="loadHistorico" />
+                                        <ToolbarSpacer/>
+                                    </content>
+                                </OverflowToolbar>
+                            </IconTabFilter>
+                        </items>
+                    </IconTabBar>
+                
+                </IconTabFilter>
+                <IconTabFilter text="{i18n>servicios}" key="closed">
+
+                    <fb:FilterBar reset="_clearModelServicios" search="onSearchServicios" showRestoreButton="true" showClearButton="true">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="A" label="{i18n>orden}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <Input value="{/filtrosServicios/Orden}" type="Text" placeholder="{i18n>orden}" submit="onSearchServicios"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="G" label="{i18n>proveedor}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <MultiInput
+                                        id="multiInputProvS"
+                                        suggestionItems="{ path: '/ProveedorCollection' }"
+                                        tokenUpdate="changeTokensServicios"
+                                        valueHelpRequest="handleValueHelp"
+                                        valueHelpOnly="true">
+                                        <core:Item key="{Code}" text="{Desc_1}" />
+                                    </MultiInput>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="D" label="{i18n>posicion}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <Input value="{/filtrosServicios/Posicion}" type="Text" placeholder="{i18n>posicion}"  submit="onSearchServicios"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="B" label="{i18n>desde}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <DatePicker value="{/filtrosServicios/Desde}" minDate="{/filtrosServicios/minimumDate}" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" change="onSearchServicios"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="C" label="{i18n>hasta}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <DatePicker value="{/filtrosServicios/Hasta}" minDate="{/filtrosServicios/minimumDate}" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" change="onSearchServicios" />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+
+                    <IconTabBar
+                        headerBackgroundDesign="Transparent"
+                        class="sapUiResponsiveContentPadding sapUiSmallMarginBegin">
+                        <items>
+                            <IconTabFilter text="{i18n>pendientes}" key="open">
+                                <Table id="tableServicios"
+                                    inset="false"
+                                    items="{ocServicios>/ocServicios}"
+                                    alternateRowColors="true"
+                                    >
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <content>
+                                                <Title text="" level="H2"/>
+                                                <ToolbarSpacer />
+                                                <core:Icon
+                                                    src="sap-icon://excel-attachment"
+                                                    size="26px"
+                                                    color="#229954" 
+                                                    press="onExportServiciosPendientes"
+                                                    >
+                                                </core:Icon>
+                                            </content>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <infoToolbar>
+                                        <OverflowToolbar id="messageInternos">
+                                            <Label text="{i18n>messageInternos}"/>
+                                        </OverflowToolbar>
+                                    </infoToolbar>
+                                    <columns>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="9em">
+                                            <Text text="{i18n>orden}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="7em">
+                                            <Text text="{i18n>posicion}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="15em">
+                                            <Text text="{i18n>fechaDocumento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="auto">
+                                            <Text text="{i18n>proveedor}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="auto">
+                                            <Text text="{i18n>texto}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="7em">
+                                            <Text text="{i18n>moneda}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="10em"
+                                            hAlign="End">
+                                            <Text text="{i18n>importe}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            hAlign="End">
+                                        </Column>
+                                        
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem 
+                                            vAlign="Middle" 
+                                            type="Navigation"
+                                            press=".handleTableSelectDialogPressServicePend"
+                                            >
+                                            <cells>
+                                                <ObjectIdentifier
+                                                    title="{= parseInt(${ocServicios>Orden}) }" />
+                                                <Text
+                                                    text="{= parseInt(${ocServicios>Posicion}) }" />
+                                                <Text
+                                                    text="{ocServicios>Fecha}" />
+                                                <Text
+                                                    text="{ocServicios>NombreProv}" />
+                                                <Text
+                                                    text="{ocServicios>Texto}" />
+                                                <Text
+                                                    text="{ocServicios>Moneda}" />
+                                                <Text
+                                                    text="{
+                                                        parts: [{path: 'ocServicios>Importe'}, {path: 'ocServicios>Moneda'}],
+                                                        formatter: '.formatter.numberDots'
+                                                    }" />
+                                                <core:Icon
+                                                    src="sap-icon://detail-view"
+                                                    size="20px"
+                                                    color="#0a6ed1" 
+                                                    press="onOpenOrdenCompraServicePend">
+                                                </core:Icon>
+                                            </cells>
+                                        </ColumnListItem>        
+                                    </items>
+                                </Table>
+
+                                <OverflowToolbar>
+                                    <content>
+                                        <ToolbarSpacer/>
+                                        <Button id="loadMoreServicios" text="{i18n>loadMore}" press="loadServicios" />
+                                        <ToolbarSpacer/>
+                                    </content>
+                                </OverflowToolbar>
+                            </IconTabFilter>
+                            <IconTabFilter text="{i18n>historial}" key="closed">
+                                <Table id="tableServiciosHist"
+                                    inset="false"
+                                    items="{ocServiciosHist>/ocServicios}"
+                                    alternateRowColors="true"
+                                    >
+                                    <headerToolbar>
+                                        <OverflowToolbar>
+                                            <content>
+                                                <Title text="" level="H2"/>
+                                                <ToolbarSpacer />
+                                                <core:Icon
+                                                    src="sap-icon://excel-attachment"
+                                                    size="26px"
+                                                    color="#229954" 
+                                                    press="onExportServiciosHist"
+                                                    >
+                                                </core:Icon>
+                                            </content>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="9em">
+                                            <Text text="{i18n>orden}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="7em">
+                                            <Text text="{i18n>posicion}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="15em">
+                                            <Text text="{i18n>fechaDocumento}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="auto">
+                                            <Text text="{i18n>proveedor}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="auto">
+                                            <Text text="{i18n>texto}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="7em">
+                                            <Text text="{i18n>moneda}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Tablet"
+                                            demandPopin="true"
+                                            width="10em"
+                                            hAlign="End">
+                                            <Text text="{i18n>importe}" />
+                                        </Column>
+                                        <Column
+                                            minScreenWidth="Desktop"
+                                            demandPopin="true"
+                                            width="4rem"
+                                            hAlign="End">
+                                        </Column>
+                                        
+                                    </columns>
+                                    <items>
+                                        <ColumnListItem 
+                                            vAlign="Middle" 
+                                            type="Navigation"
+                                            press=".handleTableSelectDialogPressServiceHist"
+                                            >
+                                            <cells>
+                                                <ObjectIdentifier
+                                                    title="{= parseInt(${ocServiciosHist>Orden}) }" />
+                                                <Text
+                                                    text="{= parseInt(${ocServiciosHist>Posicion}) }" />
+                                                <Text
+                                                    text="{ocServiciosHist>Fecha}" />
+                                                <Text
+                                                    text="{ocServiciosHist>NombreProv}" />
+                                                <Text
+                                                    text="{ocServiciosHist>Texto}" />
+                                                <Text
+                                                    text="{ocServiciosHist>Moneda}" />
+                                                <Text
+                                                    text="{
+                                                        parts: [{path: 'ocServiciosHist>Importe'}, {path: 'ocServiciosHist>Moneda'}],
+                                                        formatter: '.formatter.numberDots'
+                                                    }" />
+                                                <core:Icon
+                                                    src="sap-icon://detail-view"
+                                                    size="20px"
+                                                    color="#0a6ed1" 
+                                                    press="onOpenOrdenCompraServiceHist">
+                                                </core:Icon>
+                                            </cells>
+                                        </ColumnListItem>        
+                                    </items>
+                                </Table>
+
+                                <OverflowToolbar>
+                                    <content>
+                                        <ToolbarSpacer/>
+                                        <Button id="loadMoreServiciosHist" text="{i18n>loadMore}" press="loadServiciosHist" />
+                                        <ToolbarSpacer/>
+                                    </content>
+                                </OverflowToolbar>
+                            </IconTabFilter>
+                        </items>
+                    </IconTabBar>
+
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+
+    </html:div>
+
+</mvc:View>

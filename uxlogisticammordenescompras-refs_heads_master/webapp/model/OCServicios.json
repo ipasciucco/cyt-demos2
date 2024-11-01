@@ -1,0 +1,28 @@
+{ 
+    "ocServicios": [
+        {
+            "OrdenServicio": "482004",
+            "Posicion": "1",
+            "Fecha": "25-09-21",
+            "Texto": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+            "Importe": "1000",
+            "Moneda": "USD"
+        },
+        {
+            "OrdenServicio": "482015",
+            "Posicion": "3",
+            "Fecha": "26-09-21",
+            "Texto": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+            "Importe": "1300",
+            "Moneda": "USD"
+        },
+        {
+            "OrdenServicio": "482032",
+            "Posicion": "4",
+            "Fecha": "28-09-21",
+            "Texto": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+            "Importe": "700",
+            "Moneda": "USD"
+        }
+    ]
+}

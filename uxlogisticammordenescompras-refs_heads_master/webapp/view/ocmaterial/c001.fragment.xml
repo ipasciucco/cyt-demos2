@@ -1,0 +1,402 @@
+<!--
+vim: set ts=2 sw=2 sts=2 tw=80 et:
+-->
+<core:FragmentDefinition
+    controllerName="com.cyt.zmmportalproveedoresordenescompras2021111116.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
+   <Dialog
+        contentHeight="1122px"
+        contentWidth="793px">
+        <customHeader>
+            <Bar>
+                <contentLeft>
+                </contentLeft>
+                <contentMiddle>
+                    <Title text="{i18n>printTitle}" />
+                </contentMiddle>
+                <contentRight>
+                    <Button text="{i18n>printPDF}" customData:oc="c001" press="onPrint"/>
+                    <Button text="{i18n>closePDF}" customData:oc="c001" press="exitMateriales" />
+                </contentRight>
+            </Bar>
+        </customHeader>
+        <html:style>
+            .box {
+                border-style: solid;
+                border-width: 1px;
+                padding: 10px;  
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            .formBox {
+                width: 100%;
+                margin-top: 20px;
+            }
+            .logoBox {
+                width:100%;
+                text-align: End;
+            }
+            .boxVina {
+                width: 100%;
+            }
+            .campoFirma {
+                width: 300px;
+                text-align: center !important;
+                border-top-style: solid;
+                border-top-width: 1px;
+                margin-top: 40px;
+            }
+            .textBlock{
+                margin-top: 40px;
+            }
+            .tableInfo{
+                margin-top: 30px;
+            }
+            .textFooter{
+                margin-top: 70px;
+            }
+            .textBold{
+                font-weight: bold;
+            }
+            .spaceRight{
+                margin-right: 10px;
+            }
+            .sapUiFormResGrid.sapUiFormToolbar>div:first-child {
+                line-height: normal !important;
+            }    
+        </html:style>
+       
+        <VBox  id="c001" class="sapUiSmallMargin">
+            <HBox class="formBox">
+                <VBox class="boxVina">
+                    <Text text="{ordencompra>/ordendata/Soc_text}" />
+                    <Text text="{i18n>RUT}: {ordencompra>/ordendata/RutSociedad}" />
+                    <Text text="{ordencompra>/ordendata/DireccionSociedad}" />
+                    <Text text="{ordencompra>/ordendata/CiudadSociedad}" />
+                </VBox>
+                <HBox class="logoBox" justifyContent="End" alignContent="End">
+                    <Image src="{imgBaseConf>/imgBasePath}/images/logoPDF.png" width="70%"/>
+                </HBox>
+            </HBox>
+            <HBox justifyContent="Center">
+                <Title level="H1" text="{i18n>numeroOrden} {ordencompra>/ordendata/Orden}" />
+            </HBox>
+            <HBox justifyContent="End">
+                <VBox>
+                    <Text text="{i18n>fechaEmision}: {ordencompra>/ordendata/Fecha}" />
+                    <!-- <html:span>Página        : [[page_cu]] / [[page_nb]] </html:span> -->
+                </VBox>
+            </HBox>
+            <HBox class="box">
+                <VBox class="formBox">
+                    <f:SimpleForm
+                        editable="false"
+                        layout="ResponsiveGridLayout"
+                        labelSpanXL="2"
+                        labelSpanL="2"
+                        labelSpanM="6"
+                        labelSpanS="6"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="2"
+                        columnsL="2"
+                        columnsM="2"
+                        singleContainerFullSize="false" >
+                        <f:toolbar>
+                            <Toolbar>
+                                <VBox>
+                                    <Title text="Sres. {ordencompra>/ordendata/NombreProveedor}" />
+                                    <Text text="{ordencompra>/ordendata/DireccionProveedor}" />
+                                </VBox>
+                            </Toolbar>
+                        </f:toolbar>
+                        <f:content>
+                            <core:Title/>
+                            <Label text="{i18n>nroProveedor}" />
+                            <Text text="{ordencompra>/ordendata/Proveedor}"/>
+                            <Label text="{i18n>rutProveedor}" />
+                            <Text text="{ordencompra>/ordendata/RutProveedor}" />
+                            <Label text="{i18n>condicionPago}" />
+                            <Text text="{ordencompra>/ordendata/CondicionPagoDesc}" />
+                            <Label text="Incoterms" />
+                            <Text text="{ordencompra>/ordendata/Incoterms}" />
+                            <Label text="{i18n>moneda}" />
+                            <Text text="{ordencompra>/ordendata/MonedaDesc}" />
+                            
+                            <core:Title/>
+                            <Label text="{i18n>fechaEntrega}" />
+                            <Text text="{ordencompra>/ordendata/Fecha}" />
+                            <Label text="{i18n>lugarEntrega}" />
+                            <Text text="{ordencompra>/ordendata/LugarEntrega}" />
+                            <Label text="{i18n>referencia}" />
+                            <Text text="{ordencompra>/ordendata/Referencia}" />
+                            
+                            <core:Title text="{i18n>proveedor}" />
+                            <Label text="{i18n>contacto}" />
+                            <Text text="{ordencompra>/ordendata/ContactoProveedor}" />
+                            <Label text="{i18n>telefonoFax}" />
+                            <Text text="{ordencompra>/ordendata/TelefonoProveedor}" />
+                            
+                            <core:Title text="{i18n>comprador}" />
+                            <Label text="{i18n>contacto}" />
+                            <Text text="{ordencompra>/ordendata/NombreComprador}" />
+                            <Label text="{i18n>telefonoFax}" />
+                            <Text text="{ordencompra>/ordendata/TelefonoComprador}" />
+                            
+                            <core:Title text="{i18n>solicitante}" />
+                            <Text text="{ordencompra>/ordendata/Solicitante}" />
+                        </f:content>
+                    </f:SimpleForm>
+                </VBox>
+            </HBox>
+            <FormattedText htmlText="{ordencompra>/ordendata/Texto}" />
+            <VBox>
+                <Table
+                    items="{
+                        path: 'ordencompra>/ordencompra/MatPendientesSet/results',
+                        sorter: { path: 'ordencompra>Item', descending: false}
+                    }">
+                    <columns>
+                        <Column
+                            width="4em">
+                            <Text text="Pos." />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet"
+                            width="5em"
+                            demandPopin="true">
+                            <Text text="{i18n>material}" />
+                        </Column>
+                        <Column
+                            demandPopin="true"
+                            width="10em"
+                            hAlign="End">
+                            <Text text="{i18n>denominacion}" />
+                        </Column>
+                        <Column
+                            width="7em"
+                            demandPopin="true"
+                            hAlign="Center">
+                            <Text text="{i18n>cantPedida}" />
+                        </Column>
+                        <Column
+                            width="5em"
+                            hAlign="End">
+                            <Text text="{i18n>unidad}" />
+                        </Column>
+                        <Column
+                            width="8em"
+                            hAlign="End">
+                            <Text text="{i18n>precioUnit}" />
+                        </Column>
+                        <Column
+                            width="7em"
+                            hAlign="End">
+                            <Text text="{i18n>valorNeto}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem vAlign="Middle">
+                            <cells>
+                                <Text text="{=parseInt(${ordencompra>Item})}" wrapping="false" />
+                                <!-- <Text text="{=parseInt(${ordencompra>Material})}" wrapping="false"/> -->
+                                <Text text="{= isNaN(${ordencompra>Material}) ? ${ordencompra>Material} : Number(${ordencompra>Material})}" wrapping="false"/>
+                                <Text text="{ordencompra>MatDesc}" wrapping="true" />
+                                <Text text="{ordencompra>CantPedida}" wrapping="false" />
+                                <Text text="UN" wrapping="false"/>
+                                <Text text="{
+                                    parts: [{path: 'ordencompra>PrecioUnit'}, {path: 'ordencompra>Moneda'}], 
+                                    formatter: '.formatter.numberDots' 
+                                }" wrapping="false" />
+                                <Text text="{ 
+                                   parts: [{path: 'ordencompra>Importe'}, {path: 'ordencompra>Moneda'}],
+                                    formatter: '.formatter.numberDots' 
+                                }" wrapping="false" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+            
+            <html:div class="html2pdf__page-break"></html:div>
+            
+            <VBox>
+                <HBox class="formBox">
+                    <VBox class="boxVina">
+                        <Text text="{ordencompra>/ordendata/Soc_text}" />
+                        <Text text="{i18n>RUT}
+                        : {ordencompra>/ordendata/RutSociedad}" />
+                        <Text text="{ordencompra>/ordendata/DireccionSociedad}" />
+                        <Text text="{ordencompra>/ordendata/CiudadSociedad}" />
+                    </VBox>
+                    <HBox class="logoBox" justifyContent="End" alignContent="End">
+                        <Image src="{imgBaseConf>/imgBasePath}/images/logoPDF.png" width="70%"/>
+                    </HBox>
+                </HBox>
+                <HBox justifyContent="Center">
+                    <Title level="H1" text="{i18n>numeroOrden} {ordencompra>/ordencompra/Orden}" />
+                </HBox>
+                <HBox justifyContent="End">
+                    <VBox>
+                        <Text text="{i18n>fechaEmision} : {ordencompra>/ordendata/Fecha}" />
+                        <!-- <html:span>Página        : [[page_cu]] / [[page_nb]] </html:span> -->
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <VBox>
+                <HBox>
+                    <Text class="campoFirma" text="{i18n>textFirma}" />
+                </HBox>
+                <HBox>
+                    <VBox>
+                        
+                        <Text class="textBlock" text="{i18n>textoAceptar}" />
+                        <Text class="textBlock textBold" text="{i18n>textoGuiaDespacho}" />
+                        
+                        <HBox class="tableInfo">
+                            <Text class="textBold spaceRight" text="{i18n>compraMateriales}" />
+                            <Text class="textBold" text="{i18n>ordenes45}" />
+                        </HBox>
+                        <Table>
+                            <columns>
+                                <Column
+                                    width="5em">
+                                    <Text text="{i18n>campoXMLSII}" />
+                                </Column>
+                                <Column>
+                                    <Text text="{i18n>descripcionCampo}" />
+                                </Column>
+                                <Column>
+                                    <Text text="{i18n>exigencia}" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="801" />
+                                        <Text text="{i18n>ordencompra}" />
+                                        <Text text="{i18n>obligatorio}" />
+                                    </cells>
+                                </ColumnListItem>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="50" />
+                                        <Text text="{i18n>guiaDespacho}" />
+                                        <Text text="{i18n>obligatorioGuia}" />
+                                    </cells>
+                                </ColumnListItem>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="52" />
+                                        <Text text="{i18n>guiaElectronica}" />
+                                        <Text text="{i18n>obligatorioGuia}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+
+                        <HBox class="tableInfo">
+                            <Text class="textBold spaceRight" text="{i18n>compraServicios}" />
+                            <Text class="textBold" text=" {i18n>ordenes42}" />
+                        </HBox>
+                        <Table>
+                            <columns>
+                                <Column
+                                    width="5em">
+                                    <Text text="{i18n>campoXMLSII}" />
+                                </Column>
+                                <Column>
+                                    <Text text="{i18n>descripcionCampo}" />
+                                </Column>
+                                <Column>
+                                    <Text text="{i18n>exigencia}" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="801" />
+                                        <Text text="{i18n>ordencompra}" />
+                                        <Text text="{i18n>obligatorio}" />
+                                    </cells>
+                                </ColumnListItem>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="HES" />
+                                        <Text text="{i18n>hojasServicio}" />
+                                        <Text text="{i18n>obligatorio}" />
+                                    </cells>
+                                </ColumnListItem>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="52" />
+                                        <Text text="{i18n>hojasServicio}" />
+                                        <Text text="{i18n>opcional}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        
+                        <HBox class="tableInfo">
+                            <Text class="textBold spaceRight" text="{i18n>importaciones}" />
+                            <Text class="textBold" text=" {i18n>ordenes47}" />
+                        </HBox>
+                        <Table>
+                            <columns>
+                                <Column
+                                    width="5em">
+                                    <Text text="{i18n>campoXMLSII}" />
+                                </Column>
+                                <Column>
+                                    <Text text="{i18n>descripcionCampo}" />
+                                </Column>
+                                <Column>
+                                    <Text text="{i18n>exigencia}" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Text text="811" />
+                                        <Text text="{i18n>Carta Porte}" />
+                                        <Text text="{i18n>obligatorio}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                        
+                        <HBox class="textFooter">
+                            <Text text="{i18n>acuerdo}" />
+                        </HBox>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+        </VBox>
+         <VBox  id="c001-img" class="sapUiSmallMargin">
+            <VBox class="formBox">
+                <html:hr />
+               
+                <Image src="{imgBaseConf>/imgBasePath}/images/tos-1.png" width="100%"/>
+                <Image src="{imgBaseConf>/imgBasePath}/images/tos-2.png" width="100%"/>
+            
+                <html:hr />
+            </VBox>
+        </VBox>
+
+        
+    
+    </Dialog>
+</core:FragmentDefinition>

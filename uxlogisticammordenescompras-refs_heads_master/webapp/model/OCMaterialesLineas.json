@@ -1,0 +1,39 @@
+{ 
+    "ocMaterialesLineas": [
+        {
+            "Posicion": "1",
+            "CodigoMaterial": "COD1",
+            "DescripcionMaterial": "Material1",
+            "CantidadPedida": "100",
+            "CantidadPendiente": "20",
+            "FechaEntrega": "25-10-2021",
+            "PrecioUnit": "200",
+            "ValorImporte": "20000",
+            "Moneda": "USD",
+            "Centro": "Centro1"
+        },
+        {
+            "Posicion": "2",
+            "CodigoMaterial": "COD2",
+            "DescripcionMaterial": "Material2",
+            "CantidadPedida": "50",
+            "CantidadPendiente": "15",
+            "FechaEntrega": "25-10-2021",
+            "PrecioUnit": "150",
+            "ValorImporte": "7500",
+            "Moneda": "USD",
+            "Centro": "Centro1"
+        },{
+            "Posicion": "3",
+            "CodigoMaterial": "COD3",
+            "DescripcionMaterial": "Material3",
+            "CantidadPedida": "50",
+            "CantidadPendiente": "10",
+            "FechaEntrega": "25-10-2021",
+            "PrecioUnit": "100",
+            "ValorImporte": "5000",
+            "Moneda": "USD",
+            "Centro": "Centro2"
+        }
+    ]
+}

@@ -1,0 +1,116 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		id="myDialog"
+		noDataText="{i18n>noProductsFound}"
+		title="{i18n>detailsTitle}"
+		cancel=".handleClose"
+        search=".handleSearchDetalleMaterial"
+		items="{
+			path : 'detailsMaterial>/detailsMaterial'
+		}">
+		<ColumnListItem vAlign="Middle">
+			<cells>
+				<ObjectIdentifier title="{= parseInt(${detailsMaterial>Item})}"/>
+                <Text text="{= isNaN(${detailsMaterial>Material}) ? ${detailsMaterial>Material} : Number(${detailsMaterial>Material})}" wrapping="false"/>
+				<Text text="{detailsMaterial>MatDesc}" />
+				<Text text="{detailsMaterial>CantPedida}"/>
+				<Text text="{detailsMaterial>CantPendiente}" />
+                <Text text="{detailsMaterial>FechaEntrega}" />
+                
+                <Text text="{ 
+                    parts: [{path: 'detailsMaterial>PrecioUnit'}, {path: 'detailsMaterial>Moneda'}],
+                    formatter: '.formatter.numberDots' 
+                }" />
+                <Text text="{ 
+                    parts: [{path: 'detailsMaterial>Importe'}, {path: 'detailsMaterial>Moneda'}],
+                    formatter: '.formatter.numberDots' 
+                }"/>
+                <Text text="{detailsMaterial>Moneda}" />
+                <Text text="{detailsMaterial>CentroDesc}" />
+                
+                <core:Icon
+                    src="sap-icon://sys-next-page"
+                    size="20px"
+                    color="#0a6ed1"
+                    press='onGetMaterialTag'
+                    visible="{= ${detailsMaterial>Etiqueta} === 'x' || ${detailsMaterial>Etiqueta} === 'X' }"
+                    >
+                </core:Icon>
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column width="6em">
+				<header>
+					<Text text="{i18n>posicion}" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Desktop" demandPopin="true" width="8rem">
+				<header>
+					<Text text="{i18n>codigoMaterial}" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Desktop"
+				demandPopin="true"
+                width="auto"
+				>
+				<header>
+					<Text text="{i18n>descMaterial}" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Desktop"
+				demandPopin="true"
+				hAlign="Center"
+                width="8rem">
+				<header>
+					<Text text="{i18n>cantPedida}" />
+				</header>
+			</Column>
+			<Column width="9rem">
+				<header>
+					<Text text="{i18n>cantPendiente}" />
+				</header>
+			</Column>
+            <Column minScreenWidth="Tablet" demandPopin="true" width="7rem">
+				<header>
+					<Text text="{i18n>fechaEntrega}" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Desktop"
+				demandPopin="true"
+				width="6rem">
+				<header>
+					<Text text="{i18n>precioUnit}" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Desktop"
+				demandPopin="true"
+				hAlign="Center"
+                width="8rem">
+				<header>
+					<Text text="{i18n>valor}" />
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="{i18n>moneda}" />
+				</header>
+			</Column>   
+			<Column width="8rem">
+				<header>
+					<Text text="{i18n>centro}" />
+				</header>
+			</Column>
+            <Column width="4rem">
+				<header>
+					<Text text="" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

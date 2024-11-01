@@ -1,0 +1,25 @@
+{ 
+    "ocServiciosLineas": [
+        {
+            "NroHES": "1",
+            "Texto": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+            "Importe": "500",
+            "Moneda": "USD",
+            "Centro": "Centro1"
+        },
+        {
+            "NroHES": "1",
+            "Texto": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+            "Importe": "600",
+            "Moneda": "USD",
+            "Centro": "Centro1"
+        },        
+        {
+            "NroHES": "1",
+            "Texto": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+            "Importe": "1000",
+            "Moneda": "USD",
+            "Centro": "Centro1"
+        }
+    ]
+}

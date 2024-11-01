@@ -1,0 +1,44 @@
+{ 
+    "ocMaterialesHistorial": [
+        {
+            "NroOC": "482004",
+            "FechaDocumento": "03-09-2021",
+            "Sociedad": "Sociedad1"
+        },
+        {
+            "NroOC": "332655",
+            "FechaDocumento": "01-09-2021",
+            "Sociedad": "Sociedad2"
+        },
+        {
+            "NroOC": "621554",
+            "FechaDocumento": "19-08-2021",
+            "Sociedad": "Sociedad1"
+        },
+        {
+            "NroOC": "433156",
+            "FechaDocumento": "21-08-2021",
+            "Sociedad": "Sociedad1"
+        },
+        {
+            "NroOC": "482004",
+            "FechaDocumento": "25-07-2021",
+            "Sociedad": "Sociedad1"
+        },
+        {
+            "NroOC": "332655",
+            "FechaDocumento": "02-07-2021",
+            "Sociedad": "Sociedad2"
+        },
+        {
+            "NroOC": "621554",
+            "FechaDocumento": "18-06-2021",
+            "Sociedad": "Sociedad1"
+        },
+        {
+            "NroOC": "433156",
+            "FechaDocumento": "10-05-2021",
+            "Sociedad": "Sociedad1"
+        }
+    ]
+}

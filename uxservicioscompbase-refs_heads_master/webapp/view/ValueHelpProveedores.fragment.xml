@@ -1,0 +1,26 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		id="valueHelpDialog"
+		title="{i18n>vendor.selectDialog.title}"
+		items="{/ProveedorCollection}"
+		search="_handleValueHelpSearch"
+        liveChange="_handleValueHelpSearch"
+		confirm="_handleValueHelpClose"
+		cancel="_handleValueHelpClose"
+		multiSelect="true"
+		searchPlaceholder="{i18n>vendor.selectDialog.searchPlaceholder}"
+		>
+		<StandardListItem
+			iconDensityAware="false"
+			iconInset="false"
+            title="{Desc_1}"
+			description="{Desc_2}"
+            >
+            <customData>
+                <core:CustomData key="Key" value="{Code}"/>
+            </customData>
+        </StandardListItem>
+	</SelectDialog>
+</core:FragmentDefinition>

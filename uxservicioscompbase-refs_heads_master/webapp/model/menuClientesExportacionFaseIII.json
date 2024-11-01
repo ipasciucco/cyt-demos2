@@ -1,0 +1,92 @@
+[
+    {
+        "title":"miCuenta",
+        "icon":"sap-icon://business-by-design",
+        "submenu":[
+            {   
+                "title":"misDatos",
+                "icon":"sap-icon://business-card",
+                "action":{
+                    "type": "External",
+                    "link": "CuentaCliente",
+                    "action": "Display"
+                }
+            },
+            {   
+                "title":"cuentasporpagar",
+                "icon":"sap-icon://monitor-payments",
+                "action":{
+                    "type": "External",
+                    "link": "CuentasPagarCliente",
+                    "action": "Display"
+                }
+            }
+        ]
+    },
+    {
+        "title":"reclamos",
+        "icon":"sap-icon://warning",
+        "submenu":[
+            {   
+                "title":"ingresarReclamos",
+                "icon":"sap-icon://message-warning",
+                "action":{
+                    "type": "External",
+                    "link": "IngresoReclamos",
+                    "action": "Display"
+                }
+            },
+            {   
+                "title":"reclamosRealizados",
+                "icon":"sap-icon://quality-issue",
+                "action":{
+                    "type": "External",
+                    "link": "SeguimientoReclamos",
+                    "action": "Display"
+                }
+            }
+        ]
+    },
+    {
+        "title":"pedidos",
+        "icon":"sap-icon://shipping-status",
+        "submenu":[
+            {   
+                "title":"ingresarPedido",
+                "icon":"sap-icon://cart-4",
+                "action":{
+                    "type": "External",
+                    "link": "Pedidos",
+                    "action": "Display"
+                }
+            },
+            {   
+                "title":"pedidosIngresados",
+                "icon":"sap-icon://list",
+                "action":{
+                    "type": "External",
+                    "link": "PedidosCliente",
+                    "action": "Display"
+                }
+            }
+        ]
+    },
+    {   
+        "title":"contacto",
+        "icon": "sap-icon://email",
+        "action":{
+            "type": "External",
+            "link": "ContactoCliente",
+            "action": "Display"
+        }
+    },
+    {   
+        "title":"noticias",
+        "icon":"sap-icon://newspaper",
+        "action":{
+            "type": "Link",
+            "link": "https://vinacyt.com/noticias/",
+            "action": "_blank"
+        }
+    }
+]

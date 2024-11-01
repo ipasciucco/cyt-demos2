@@ -1,0 +1,341 @@
+@font-face {
+    font-family: "Meta Serif OT";
+    src: url(../fonts/MetaSerifOT-Light.eot?07e17e62ed7cacffbe2f99607d7138df) format("embedded-opentype"),url(../fonts/MetaSerifOT-Light.otf?3d19467e7ed6abdafdd2587423d2a83b) format("opentype"),url(../fonts/MetaSerifOT-Light.woff?ce4b2ca4ceee475d67657479c5af904b) format("woff"),url(../fonts/MetaSerifOT-Light.ttf?babfb919dcb8dd97c7969db81ed11b46) format("truetype"),url(../fonts/MetaSerifOT-Light.svg?3121d858f293b1a61c1e0c541592434c) format("svg");
+    font-weight: 200;
+    font-style: normal
+}
+
+@font-face {
+    font-family: "Meta Serif OT";
+    src: url(../fonts/MetaSerifOT-Book.eot?c044472269428ea6b882eb7308afa448) format("embedded-opentype"),url(../fonts/MetaSerifOT-Book.otf?94b2bcba817c2c79e605b35fa4e9e41a) format("opentype"),url(../fonts/MetaSerifOT-Book.woff?f5363b8f8f522b9af02aafb6e6dd7dcd) format("woff"),url(../fonts/MetaSerifOT-Book.ttf?c63e1d6561a5eb3529ad0259e9317d0d) format("truetype"),url(../fonts/MetaSerifOT-Book.svg?7c5f8b5da25eeac7281bf33c9d64446f) format("svg");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: "Meta Serif OT";
+    src: url(../fonts/MetaSerifOT-Medium.eot?6ea3d1c48de9b0b707b80efab111b6ea) format("embedded-opentype"),url(../fonts/MetaSerifOT-Medium.otf?68008d731958ce5a6dd937ded0bfbf20) format("opentype"),url(../fonts/MetaSerifOT-Medium.woff?fe0484bad171f7958dfb102219c490a3) format("woff"),url(../fonts/MetaSerifOT-Medium.ttf?5b703b92489693f15bdd1e2294fcfe04) format("truetype"),url(../fonts/MetaSerifOT-Medium.svg?b3a799945e949a0ef4a36a11ee11e74d) format("svg");
+    font-weight: 500;
+    font-style: normal
+}
+
+@font-face {
+    font-family: "Meta Serif OT";
+    src: url(../fonts/MetaSerifOT-MediumItalic.eot?7de85fb5a8147513321aa50061451f19) format("embedded-opentype"),url(../fonts/MetaSerifOT-MediumItalic.otf?621dec036e3e06f0bc6d3f08d1a96c93) format("opentype"),url(../fonts/MetaSerifOT-MediumItalic.woff?99d61ed91d6a4edfad9ed1f63a2129ce) format("woff"),url(../fonts/MetaSerifOT-MediumItalic.ttf?0125ed0da95a912bca88802979e7e468) format("truetype"),url(../fonts/MetaSerifOT-MediumItalic.svg?0fc71aaa06dbfa7e1d2bd64f60d65cab) format("svg");
+    font-weight: 500;
+    font-style: italic
+}
+
+@font-face {
+    font-family: Meta OT;
+    src: url(../fonts/MetaOT-Light.eot?631082827e10e8d10d59cb8862613cec) format("embedded-opentype"),url(../fonts/MetaOT-Light.otf?18bd3e2fd46e053a3bac9e9768fde3de) format("opentype"),url(../fonts/MetaOT-Light.woff?bd18a91937ea87e933c1fe3eae21ba88) format("woff"),url(../fonts/MetaOT-Light.ttf?edc30dd98173b0b0ecb1426188b846c1) format("truetype"),url(../fonts/MetaOT-Light.svg?e54c65d72563da3a9e9f7fd522727a35) format("svg");
+    font-weight: 200;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Meta OT;
+    src: url(../fonts/MetaOT.eot?c1aa40d8ae4bd85fd61ef358196ded54) format("embedded-opentype"),url(../fonts/MetaOT.otf?e9e0bd0d16840aa1192b565b39f5eaac) format("opentype"),url(../fonts/MetaOT.woff?753ff59a05317607b7cbe1083f95ce57) format("woff"),url(../fonts/MetaOT.ttf?ebf9d1f66547b4c8d960d58ddcc48b4f) format("truetype"),url(../fonts/MetaOT.svg?be285fe0e11d85e8d39242c9fee2eab9) format("svg");
+    font-weight: 300;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Meta OT;
+    src: url(../fonts/MetaOT-Book.eot?a42ce1727546b80079c30437b2128963) format("embedded-opentype"),url(../fonts/MetaOT-Book.otf?671a623d32b9855328c9d94142c1f49f) format("opentype"),url(../fonts/MetaOT-Book.woff?af6f406c544c2846666bf6b94d94b119) format("woff"),url(../fonts/MetaOT-Book.ttf?2425c82bbaa2d0d16089c498b0133a6b) format("truetype"),url(../fonts/MetaOT-Book.svg?8ef88b4f71f901a1613c0d4814c62c17) format("svg");
+    font-weight: 400;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Meta OT;
+    src: url(../fonts/MetaOT-Medium.otf?bbc3dd64b8f7bd2433ffddc33bb9e073) format("opentype");
+    font-weight: 500;
+    font-style: normal
+}
+
+@font-face {
+    font-family: Meta OT;
+    src: url(../fonts/MetaOT-Bold.otf?4914c413202d60925361d70f8b8f6631) format("opentype");
+    font-weight: 600;
+    font-style: normal
+}
+
+
+span, button, a {
+    font-family: Meta Serif OT;
+}
+
+.textFont {
+    font-family: 'Meta OT' !important;
+    font-size: 1rem;
+}
+
+.menu * {
+    background-color: white !important;
+    color: #2d2a26 !important;
+}
+.menu * :hover{
+    background-color: white !important;
+    color: #2d2a26 !important;
+}
+
+.sapTntToolHeader .sapMMenuBtn.sapMMenuBtnRegular .sapMBtnInner::after{
+    color: #2d2a26 !important;
+}
+
+.sapTntToolHeader .sapMMenuBtn{
+    max-width: 20rem;
+}
+
+.menu span {
+    text-transform: uppercase;
+    font-family: Meta Serif OT;
+    letter-spacing: 1.5px;
+    color: #2d2a26 !important;
+}
+
+.menu select {
+    text-transform: uppercase;
+    font-family: Meta Serif OT;
+    letter-spacing: 1.5px;
+    color: #2d2a26 !important;
+    border-color: #2d2a26;
+}
+
+.menu span:hover {
+    color: #2d2a26 !important;
+}
+
+.menu .hoverMenu span:hover:before {
+    width: 100%;
+}
+
+.menu .hoverMenu span:before{
+	content: "";
+    height: 4px;
+    width: 0;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    background: #ff5c35;
+    transition: all .4s;
+}
+
+.menu span :hover {
+    text-decoration: none;
+    color: #2d2a26 !important;
+}
+
+.menu button :hover {
+    color: #2d2a26 !important;
+}
+
+.logoCYTHeader {
+/*
+    width: 20rem;
+    height: auto;
+*/
+    margin-bottom: 3rem;
+}
+
+/*
+@media (min-width: 1024px) 
+.fondoPrint {
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: white;
+}
+*/
+
+.fondoPrint {
+    background: url(../images/bg-print.png) no-repeat scroll 50%;
+    background-color: white;
+
+}
+
+.logoCYTFooter {
+    width: 20rem;
+    height: auto;
+    left: 25%;
+}
+
+.header {
+    background-color: white;
+    padding: 15px 15px 0px 15px;
+}
+
+.footer {
+    background-color: #2d2a26;
+    /* padding: 2%; */
+    /* bottom: 10px; */
+    /* height: 50px; */
+}
+
+.footerVCT {
+    background-color: #6C6964;
+}
+
+
+.footerInfo {
+    background-color: #2d2a26;
+    
+}
+
+.footerImages {
+    background-color: #2d2a26;
+    bottom: 0px;
+    min-height:100px;
+}
+
+.footerText {
+    color: white !important;
+    
+}
+
+.logolinkedin {
+    width: 16px;
+    height: auto;
+}
+
+.languageList {
+    left: 30%; 
+}
+
+.languageList .linkLang {
+    margin: 5px;
+}
+
+
+.videoBanner {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    margin: 0px 0px 5px 0px;
+}
+
+
+
+.imgLogo {
+    margin: 2rem auto 1rem auto;
+    width: 50%;
+    height: auto;
+    display: block;
+}
+
+.imgLogoFooter {
+    vertical-align: middle;
+    width: 130%;
+    max-width: 200px;
+}
+
+.imgLogoEmpresa {
+    margin-bottom: 3rem;
+    max-width: 80px;
+    float: right;
+}
+
+.fondoBlanco {
+    background-color: white;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+.verticalLayoutCenter {
+    text-align-last: center;
+    padding: 0rem 7rem 0rem 7rem !important;
+}
+@media (max-width:599px) {
+    .verticalLayoutCenter {
+        text-align-last: center;
+        padding: 0rem 3rem 0rem 3rem !important;
+    }
+}
+
+
+
+
+.size0 {
+    font-size: 0.9rem;
+}
+.size1 {
+	font-size : 1.5rem;
+}
+.size2 {
+	font-size : 2.5rem;
+}
+.size3 {
+	font-size : 5rem;
+}
+.size4 {
+	font-size : 7.5rem;
+}
+.size5 {
+	font-size : 10rem;
+}
+
+@media (max-width:599px) {
+    .size0 {
+        font-size: 0.5rem
+    }
+	.size1 {
+		font-size : 1rem;
+	}
+	.size2 {
+		font-size : 2rem;
+	}
+	.size3 {
+		font-size : 3rem;
+	}
+	.size4 {
+		font-size : 4rem;
+	}
+	.size5 {
+		font-size : 5rem;
+	}
+}
+
+.sapMMenu {
+	border-radius: 0px;
+	text-transform: uppercase !important;
+	box-shadow: none;
+}
+
+.sapMMenu li{
+	text-transform: uppercase;
+	padding: 10px;
+	text-align:center;
+	color: #2d2a26 !important;
+	font-weight: 400;
+	font-family: "Meta Serif OT";
+	letter-spacing:1.5px; 
+}
+
+.sapMMenu li:hover{
+	color: #ff5c35 !important;
+}
+
+.sapMLnk.linkLang {
+    color: #ff5c35 !important;
+}
+
+.cuerpoPortal {
+    background-color: white;
+}
+
+.logoVCyTPagos {
+    border-right: 2px solid white;
+    margin-right: 4px;
+}
+
+.logoVCTChileFooter {
+    margin-top: 3rem;
+}

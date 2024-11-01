@@ -1,0 +1,13 @@
+[
+    {
+           
+        "title":"documentosapagar",
+        "icon":"sap-icon://monitor-payments",
+        "action":{
+            "type": "External",
+            "link": "DocumentosAPagar",
+            "action": "Display"
+        }
+        
+    }
+]

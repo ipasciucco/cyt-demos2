@@ -1,0 +1,38 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ResponsivePopover
+		title="{i18n>comunicados}"
+		afterClose="handleAfterClose"
+		placement="Bottom">
+		<List
+			id="list"
+			items="{ComunicadosBase>/Comunicaciones}"
+            noDataText="{i18n>sinAvisosActivos}"
+            itemPress="notifPress"
+            >
+            <CustomListItem type="Active">
+                <VBox class="sapUiSmallMargin">
+                    <HBox> 
+                        <HBox width="90%">
+                            <Title text="{ComunicadosBase>Titulo}"/> 
+                        </HBox>
+                        <HBox width="10%">
+                            <core:Icon
+                                src="sap-icon://message-information"
+                                size="20px"
+                                color="#c90e37"
+                                visible="{=!${ComunicadosBase>leida}}">
+                                <core:layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </core:layoutData>
+                            </core:Icon>
+                        </HBox>                            
+                    </HBox>
+                    <FeedContent contentText="{ComunicadosBase>MensajePlano}" subheader="{ComunicadosBase>ValidoDesde}"/>
+                </VBox>
+            </CustomListItem>
+		</List>
+	</ResponsivePopover>
+</core:FragmentDefinition>
+

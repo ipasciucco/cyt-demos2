@@ -1,0 +1,342 @@
+<!--
+vim: set ts=2 sw=2 sts=2 tw=80 et:
+-->
+<core:FragmentDefinition
+    controllerName="com.cyt.zmmportalproveedoresordenescompras2021111116.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" >
+   <Dialog contentHeight="1122px" contentWidth="793px">
+  <customHeader>
+    <Bar>
+      <contentLeft>
+
+      </contentLeft>
+      <contentMiddle>
+        <Title text="{i18n>printTitle}" />
+      </contentMiddle>
+      <contentRight>
+        <!-- IMPORTANT: How to create new OCs
+          The customData:oc="c024" is used to identify the oc in the controller
+          It also prevents id collisions when different oc's fragments are loaded
+          The id of the fragment first VBox has to be the same as the customData:oc
+          The id of the fragment second VBox has to be the same as the customData:oc + "-img"
+
+          The "c024" string has to be the name of the file.
+
+          The "c024" string is the vendor's code.
+        -->
+        <Button text="{i18n>printPDF}" customData:oc="c024" press="onPrint"/>
+        <Button text="{i18n>closePDF}" customData:oc="c024" press="exitMateriales" />
+      </contentRight>
+    </Bar>
+  </customHeader>
+  <html:style>
+    .box {
+      border-style: solid;
+      border-width: 1px;
+      padding: 10px;  
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .formBox {
+      width: 100%;
+      margin-top: 20px;
+    }
+    .logoBox {
+      width:100%;
+      text-align: End;
+    }
+    .boxVina {
+      width: 100%;
+    }
+    .campoFirma {
+      width: 300px;
+      text-align: center !important;
+      border-top-style: solid;
+      border-top-width: 1px;
+      margin-top: 40px;
+    }
+    .textBlock{
+      margin-top: 40px;
+    }
+    .tableInfo{
+      margin-top: 30px;
+    }
+    .textFooter{
+      margin-top: 70px;
+    }
+    .textBold{
+      font-weight: bold;
+    }
+    .sapUiFormResGrid.sapUiFormToolbar>div:first-child {
+      line-height: normal !important;
+    }    
+    .my-box {
+      border-style: solid;
+      border-width: 1px;
+    }
+    .my-right-border {
+      border-right-style: solid;
+      border-right-width: 1px;
+    }
+    .my-left-border {
+      border-left-style: solid;
+      border-left-width: 1px;
+    }
+    .my-bottom-border {
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+    .my-top-border {
+      border-top-style: solid;
+      border-top-width: 1px;
+    }
+    .my-bold {
+      font-weight: bold;
+    }
+    .my-uppercased {
+      text-transform: uppercase;
+    }
+    .my-tiny-text {
+      padding: 0.1rem;
+      margin: 0.1rem;
+      font-size: 0.5rem;
+    }
+    .my-box-title {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    .my-signature-field {
+        width: 300px;
+        text-align: center !important;
+        border-top-style: solid;
+        border-top-width: 1px;
+        margin-top: 3em;
+    }
+    .my-bottom-right-text {
+    // position: absolute;
+    // bottom: 0;
+    // right: 0;
+    }
+    .my-padding-total-class {
+      margin-top: 5em;
+      margin-right: 1em;
+    }
+  </html:style>
+  <content>
+
+    <VBox  id="c024" class="sapUiSmallMargin">
+
+      <FlexBox alignItems="Start" justifyContent="SpaceBetween">
+          <Image src="{imgBaseConf>/imgBasePath}/images/bonterra-logo.png" width="70%"/>
+          <Text class="my-bold" text="{i18n>fe05.purchase.order.number} {ordencompra>/ordencompra/Orden}" />
+      </FlexBox>
+
+      <!-- first row of data -->
+      <HBox height="125px" class="my-box">
+        <HBox class="my-right-border" justifyContent="Start" width="50%">
+          <VBox>
+            <HBox class="my-bottom-border my-right-border">
+              <Text class="my-box-title" text="{i18n>fe05.purchase.order.invoice.to}" />
+            </HBox>
+            <Text text="{ordencompra>/ordendata/InvoiceToName}" />
+            <Text text="{i18n>fe05.purchase.order.pobox} {ordencompra>/ordendata/InvoiceToPOBOX}" />
+            <Text text="{ordencompra>/ordendata/InvoiceToCity} {ordencompra>/ordendata/InvoiceToRegion} {ordencompra>/ordendata/InvoiceToPostCode}" />
+            <Text text="{ordencompra>/ordendata/InvoiceToSMTPAddr}" />
+          </VBox>
+        </HBox>
+        <VBox class="" width="50%">
+          <!-- right grid first row of data -->
+          <HBox height="50%">
+            <VBox class="my-bottom-border my-right-border" width="50%">
+              <Text class="my-box-title my-bottom-border" width="100%" text="{i18n>fe05.purchase.order.contract}" textAlign="Center"/>
+            </VBox>
+            <VBox class="my-bottom-border" width="50%">
+              <Text class="my-tiny-text my-bold my-uppercase" text="{i18n>fe05.purchase.order.description}"/>
+            </VBox>
+          </HBox>
+          <HBox height="50%">
+            <VBox class="my-right-border" width="50%">
+              <Text class="my-box-title my-bottom-border" width="100%" text="{i18n>fe05.purchase.order.change.notice}" textAlign="Center"/>
+              <Text class="my-tiny-text" text="{ordencompra>/ordendata/ChangeNotice}" />
+            </VBox>
+            <VBox class="" width="50%">
+              <Text class="my-box-title my-bottom-border" width="100%" text="{i18n>fe05.purchase.order.buyer}" textAlign="Center"/>
+              <Text class="my-tiny-text" text="{ordencompra>/ordendata/Comprador}" />
+              <Text class="my-tiny-text" text="{ordencompra>/ordendata/ContactoComprador}" />
+            </VBox>
+          </HBox>
+        </VBox>
+      </HBox>
+
+      <!-- second row of data -->
+      <HBox class="my-bottom-border my-left-border my-right-border">
+        <HBox class="my-right-border" justifyContent="Start" width="50%">
+          <VBox>
+            <HBox class="">
+              <Text class="my-box-title my-right-border my-bottom-border" text="{i18n>fe05.purchase.order.vendor}" />
+              <Text class="sapUiTinyMarginBegin" text="{ordencompra>/ordendata/Proveedor}" />
+            </HBox>
+            <Text text="{ordencompra>/ordendata/NombreProveedor}" />
+            <Text text="{ordencompra>/ordendata/DireccionProveedor}" />
+            <Text text="{ordencompra>/ordendata/VendorCity}, {ordencompra>/ordendata/VendorDistrict}. {ordencompra>/ordendata/VendorPostalCode}" />
+            <Text text="{ordencompra>/ordendata/VendorCountryCode}" />
+          </VBox>
+        </HBox>
+        <HBox class="" justifyContent="Start" width="50%">
+          <VBox>
+            <HBox class="">
+              <Text class="my-right-border my-bottom-border my-box-title" text="{i18n>fe05.purchase.order.ship.to}" />
+              <Text class="sapUiTinyMarginBegin" text="{ordencompra>/ordendata/ShipTo}" />
+            </HBox>
+            <Text text="{ordencompra>/ordendata/DeliveryName}" />
+            <Text text="{ordencompra>/ordendata/DeliveryStreet}" />
+            <Text text="{ordencompra>/ordendata/DeliveryCity}, {ordencompra>/ordendata/DeliveryDistrict}. {ordencompra>/ordendata/DeliveryPostalCode}" />
+            <Text text="{ordencompra>/ordendata/DeliveryCountry}" />
+          </VBox>
+        </HBox>
+      </HBox>
+
+      <!-- third row of data -->
+      <HBox class="my-left-border my-bottom-border my-right-border">
+        <!-- HBox class="my-box" justifyContent="Start" width="50%" -->
+        <VBox width="50%" class="my-right-border">
+            <f:SimpleForm editable="false"
+              layout="ResponsiveGridLayout"
+              adjustLabelSpan="false"
+              singleContainerFullSize="false" 
+              labelSpanL="3" labelSpanM="3" labelSpanS="3"
+              emptySpanL="4" emptySpanM="4" emptySpanS="0"
+              columnsL="1" columnsM="1">
+            <!-- labelSpanXL="6" labelSpanL="6" labelSpanM="6" labelSpanS="6" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="6" columnsL="6" columnsM="6" singleContainerFullSize="false" -->
+              <f:content>
+                <Label class="my-uppercase" text="{i18n>fe05.purchase.order.po.date}" />
+                <Text text="{ordencompra>/ordendata/Fecha}"/>
+                <Label text="{i18n>fe05.purchase.order.terms}" />
+                <Text text="{ordencompra>/ordendata/CondicionPagoDesc}"/>
+                
+
+                <Label visible="false" text="{i18n>fe05.purchase.order.fob.terms}" />
+                <Text visible="false" text="{ordencompra>/ordencompra/FOBTerms}"/>
+              </f:content>
+            </f:SimpleForm>
+        </VBox>
+        <VBox width="50%" class="">
+            <f:SimpleForm editable="false"
+              layout="ResponsiveGridLayout"
+              adjustLabelSpan="false"
+              singleContainerFullSize="false" 
+              labelSpanL="4" labelSpanM="4" labelSpanS="4"
+              emptySpanL="4" emptySpanM="4" emptySpanS="0"
+              columnsL="1" columnsM="1">
+            <!-- labelSpanXL="6" labelSpanL="6" labelSpanM="6" labelSpanS="6" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="6" columnsL="6" columnsM="6" singleContainerFullSize="false" -->
+              <f:content>
+                <Label class="my-uppercase" text="{i18n>fe05.purchase.order.cust.po}" />
+                <Text visible="false" text="{ordencompra>/ordendata/Proveedor}"/>
+                <Label visible="false" text="{i18n>fe05.purchase.order.sales.order}" />
+                <Text visible="false" text="{ordencompra>/ordendata/Proveedor}"/>
+                <Label visible="false" text="{i18n>fe05.purchase.order.reference.1}" />
+                <Text visible="false" text="{ordencompra>/ordendata/Proveedor}"/>
+                <Label visible="false" text="{i18n>fe05.purchase.order.reference.2}" />
+                <Text visible="false" text="{ordencompra>/ordendata/Proveedor}"/>
+              </f:content>
+            </f:SimpleForm>
+        </VBox>
+      </HBox>
+
+      <!-- the main table 
+        items="{ path: 'ordencompra>/ordencompra/SItemsSet/results', sorter: { path: 'ordencompra>Linea', descending: false} }"
+      -->
+      <Table items="{ path: 'ordencompra>/ordencompra/MatPendientesSet/results', sorter: { path: 'ordencompra>Item', descending: false} }">
+        <columns>
+          <Column width="3em">
+            <Text text="{i18n>fe05.purchase.order.table.line}" />
+          </Column>
+          <Column width="12em">
+            <Text text="{i18n>fe05.purchase.order.table.metarial}" />
+          </Column>
+          <Column width="3em">
+            <Text text="{i18n>fe05.purchase.order.table.uom}" />
+          </Column>
+          <Column visible="false" width="5em">
+            <Text text="{i18n>fe05.purchase.order.table.conf.date}" />
+          </Column>
+          <Column width="5em">
+            <Text text="{i18n>fe05.purchase.order.table.req.date}" />
+          </Column>
+          <Column width="3em">
+            <Text text="{i18n>fe05.purchase.order.table.quantity}" />
+          </Column>
+          <Column width="5em">
+            <Text text="{i18n>fe05.purchase.order.table.unit.price}" />
+          </Column>
+          <Column width="5em">
+            <Text text="{i18n>fe05.purchase.order.table.extended.price}" />
+          </Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{= parseInt(${ordencompra>Item}) }" wrapping="false"/>
+              <Text text="{ordencompra>MatDesc}" wrapping="true" />
+              <Text text="{ordencompra>Unidad}" wrapping="false"/>
+              <Text text="{ordencompra>ConfDate}" wrapping="false"/>
+              <Text text="{ordencompra>FechaEntrega}" wrapping="false"/>
+              <Text text="{ordencompra>CantPedida}" wrapping="false"/>
+              <Text text="{
+                'parts': [
+                  { 'path': 'ordencompra>PrecioUnit' },
+                  { 'path': 'ordencompra>Moneda' }
+                ],
+                'formatter': '.formatter.formatCurrency'
+                }" wrapping="false"/>
+              <Text text="{ 
+                parts: [{path: 'ordencompra>Importe'}, {path: 'ordencompra>Moneda'}],
+                formatter: '.formatter.formatCurrency' }" wrapping="false" />
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+
+      <FlexBox class="my-box" alignItems="Start" justifyContent="SpaceBetween">
+        <VBox class="my-right-border" fitContainer="true">
+          <Text class="my-bold" text="{i18n>fe05.purchase.order.bonterra.organic.states}" />
+          <Text text="{i18n>fe05.purchase.order.bonterra.by}" />
+          <Text class="my-signature-field" text="{i18n>fe05.purchase.order.signature}" />
+        </VBox>
+        <HBox>
+          <Text class="my-padding-total-class my-bold" text="{i18n>fe05.purchase.order.total} {ordencompra>/ordendata/Moneda}" />
+          <Text class="my-padding-total-class" text="{ordencompra>/ordencompra/Total}" />
+          <!--Text class="my-signature-field" text="this sould go in the bootm right corner" /-->
+        </HBox>
+      </FlexBox>
+
+      <VBox>
+        <Text text="{i18n>fe05.purchase.order.disclaimer}" />
+        <Text text="{i18n>fe05.purchase.order.action}" />
+      </VBox>
+      <VBox alignItems="End">
+        <Text class="my-signature-field" text="{i18n>fe05.purchase.order.signature}" />
+      </VBox>
+
+    </VBox>
+
+      <VBox  id="c024-img" class="sapUiSmallMargin">
+        <VBox class="formBox">
+          <html:hr />
+
+          <Image src="{imgBaseConf>/imgBasePath}/images/bonterra-to.png" width="100%"/>
+
+          <html:hr />
+        </VBox>
+      </VBox>
+  </content>
+</Dialog>
+</core:FragmentDefinition>

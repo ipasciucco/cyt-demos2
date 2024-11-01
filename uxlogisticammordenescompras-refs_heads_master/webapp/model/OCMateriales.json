@@ -1,0 +1,24 @@
+{ 
+    "ocMateriales": [
+        {
+            "NroOC": "482004",
+            "FechaDocumento": "25-10-2021",
+            "Sociedad": "Sociedad1"
+        },
+        {
+            "NroOC": "332655",
+            "FechaDocumento": "27-10-2021",
+            "Sociedad": "Sociedad2"
+        },
+        {
+            "NroOC": "621554",
+            "FechaDocumento": "28-10-2021",
+            "Sociedad": "Sociedad1"
+        },
+        {
+            "NroOC": "433156",
+            "FechaDocumento": "25-10-2021",
+            "Sociedad": "Sociedad1"
+        }
+    ]
+}

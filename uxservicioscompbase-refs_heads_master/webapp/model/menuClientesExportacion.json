@@ -1,0 +1,155 @@
+[
+    {
+        "title": "miCuenta",
+        "icon": "sap-icon://business-by-design",
+        "rol": [
+            "Z_UX_COMERCIAL_PORTAL_CLIENTES_CLIENTE"
+        ],
+        "submenu": [
+            {
+                "title": "misDatos",
+                "icon": "sap-icon://business-card",
+                "action": {
+                    "type": "External",
+                    "link": "CuentaCliente",
+                    "action": "Display"
+                }
+            },
+            {
+                "title": "cuentasporpagar",
+                "icon": "sap-icon://monitor-payments",
+                "action": {
+                    "type": "External",
+                    "link": "CuentasPagarCliente",
+                    "action": "Display"
+                }
+            }
+        ]
+    },
+    {
+        "title": "reclamos",
+        "icon": "sap-icon://warning",
+        "rol": [
+            "Z_UX_COMERCIAL_PORTAL_CLIENTES_CLIENTE"
+        ],
+        "submenu": [
+            {
+                "title": "ingresarReclamos",
+                "icon": "sap-icon://message-warning",
+                "action": {
+                    "type": "External",
+                    "link": "IngresoReclamos",
+                    "action": "Display"
+                }
+            },
+            {
+                "title": "reclamosRealizados",
+                "icon": "sap-icon://quality-issue",
+                "action": {
+                    "type": "External",
+                    "link": "SeguimientoReclamos",
+                    "action": "Display"
+                }
+            }
+        ]
+    },
+    {
+        "title": "pedidos",
+        "icon": "sap-icon://shipping-status",
+        "rol": [
+            "Z_UX_COMERCIAL_PORTAL_CLIENTES_CLIENTE"
+        ],
+        "submenu": [
+            {
+                "title": "ingresarPedido",
+                "icon": "sap-icon://cart-4",
+                "action": {
+                    "type": "External",
+                    "link": "Pedidos",
+                    "action": "Display"
+                },
+                "rol": [
+                    "Z_UX_COMERCIAL_PORTAL_CLIENTES_INGRESO_PEDIDO"
+                ]
+            },
+            {
+                "title": "pedidosIngresados",
+                "icon": "sap-icon://list",
+                "action": {
+                    "type": "External",
+                    "link": "PedidosCliente",
+                    "action": "Display"
+                }
+            }
+        ]
+    },
+    {
+        "title": "portfolio",
+        "icon": "sap-icon://crm-service-manager",
+        "rol": [
+            "Z_UX_COMERCIAL_PORTAL_CLIENTES_CLIENTE"
+        ],
+        "action": {
+            "type": "External",
+            "link": "PrtPortfolio",
+            "action": "Display"
+        }
+    },
+    {
+        "title": "contacto",
+        "icon": "sap-icon://email",
+        "rol": [
+            "Z_UX_COMERCIAL_PORTAL_CLIENTES_CLIENTE"
+        ],
+        "action": {
+            "type": "External",
+            "link": "ContactoCliente",
+            "action": "Display"
+        }
+    },
+    {
+        "title": "noticias",
+        "icon": "sap-icon://newspaper",
+        "action": {
+            "type": "Link",
+            "link": "https://vinacyt.com/noticias/",
+            "action": "_blank"
+        }
+    },
+    {
+        "title": "metricas",
+        "icon": "sap-icon://bbyd-dashboard",
+        "rol": [
+            "Z_UX_COMERCIAL_PORTAL_CLIENTES_COMERCIALES"
+        ],
+        "submenu": [
+            {
+                "title": "metricasPedidos",
+                "icon": "sap-icon://shipping-status",
+                "action": {
+                    "type": "External",
+                    "link": "Metricas",
+                    "action": "Display"
+                }
+            },
+            {
+                "title": "metricasReclamos",
+                "icon": "sap-icon://quality-issue",
+                "action": {
+                    "type": "External",
+                    "link": "MetricasReclamos",
+                    "action": "Display"
+                }
+            },
+            {
+                "title": "metricasUsuarios",
+                "icon": "sap-icon://company-view",
+                "action": {
+                    "type": "External",
+                    "link": "MetricasUsuarios",
+                    "action": "Display"
+                }
+            }
+        ]
+    }
+]

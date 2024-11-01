@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:m="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		title="{i18n>proveedores}"
+		ok=".onValueHelpProveedoresOkPress"
+		cancel=".onValueHelpProveedoresCancelPress"
+		afterClose=".onValueHelpProveedoresAfterClose"
+		supportRanges="false"
+		key="Code"
+		descriptionKey="Desc_1"
+	>
+		<filterBar>
+			<fb:FilterBar advancedMode="false" search=".onFilterBarSearchValueHelpProveedores">
+				<fb:filterGroupItems>
+
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="Name"
+						label="{i18n>sapID}"
+						visibleInFilterBar="true"
+                        visible="{filtrosValueHelp>/filtroCode}"
+					>
+						<fb:control>
+							<m:Input name="Code" value="{filtrosValueHelp>/proveedores/Code}" />
+						</fb:control>
+					</fb:FilterGroupItem>					
+				
+                    <fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="Rut"
+						label="{i18n>rut}"
+						visibleInFilterBar="true"
+					>
+						<fb:control>
+							<m:Input name="Desc_2" value="{filtrosValueHelp>/proveedores/Desc_2}" />
+						</fb:control>
+					</fb:FilterGroupItem>					
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

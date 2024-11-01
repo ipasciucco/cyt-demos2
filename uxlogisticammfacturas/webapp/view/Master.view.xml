@@ -1,0 +1,21 @@
+<mvc:View
+    controllerName="com.cyt.zmmportalproveedoresfacturas2021111116.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+    width="100%"
+>
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content />                               
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

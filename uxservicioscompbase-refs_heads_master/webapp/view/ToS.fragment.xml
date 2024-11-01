@@ -1,0 +1,39 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core" >
+   <Dialog
+      title="{i18n>terminos}">
+      <customHeader>
+         <Toolbar>
+            <Title text="{i18n>terminos}"/>
+            <ToolbarSpacer/>
+            <HBox 
+               class="languageList"
+               justifyContent="End">
+               <Link
+                     class="linkLang"
+                     text="EN"
+                     press="setLanguage('EN')" />
+               <Link
+                     class="linkLang"
+                     text="ES"
+                     press="setLanguage('ES')" />
+               <Link
+                     class="linkLang"
+                     text="PT"
+                     press="setLanguage('PT')" />
+            </HBox>
+         </Toolbar>
+      </customHeader>
+      <content>
+        <VBox>
+            <Text text="{i18n>terminosDelServicioCliente1}" class="sapUiTinyMargin" />
+            <Text text="{i18n>terminosDelServicioCliente2}" class="sapUiTinyMargin" />
+            <Text text="{i18n>terminosDelServicioCliente3}" class="sapUiTinyMargin" />
+        </VBox>
+      </content>
+      <beginButton>
+         <Button text="{i18n>Cerrar}" type="Accept" press="closeToS"/>
+      </beginButton>
+   </Dialog>
+</core:FragmentDefinition>

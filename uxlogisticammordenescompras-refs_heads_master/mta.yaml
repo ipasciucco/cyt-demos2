@@ -1,0 +1,94 @@
+_schema-version: "3.2"
+ID: com-cyt-zmmportalproveedoresordenescompras2021111116
+description: Órdenes de Compra
+version: 0.0.1
+modules:
+- name: com-cyt-zmmportalproveedoresordenesco-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: com-cyt-zmmportalproveedoresordenescompr-dest-srv
+    parameters:
+      content-target: true
+  - name: com-cyt-zmmportalproveedoresordenesc-repo-host
+    parameters:
+      service-key:
+        name: com-cyt-zmmportalproveedoresordenesc-repo-host-key
+  - name: com-cyt-zmmportalproveedoresordenescompras2021-uaa
+    parameters:
+      service-key:
+        name: com-cyt-zmmportalproveedoresordenescompras2021-uaa-key
+  parameters:
+    content:
+      subaccount:
+        destinations:
+        - Name: com-cyt-zmmportalproveedoresordenescompr_repo_host
+          ServiceInstanceName: com-cyt-zmmportalproveedoresordenescompr-html5-srv
+          ServiceKeyName: com-cyt-zmmportalproveedoresordenesc-repo-host-key
+          sap.cloud.service: com-cyt-zmmportalproveedoresordenescompras2021111116
+        - Authentication: OAuth2UserTokenExchange
+          Name: com-cyt-zmmportalproveedoresordenescompras2021_uaa
+          ServiceInstanceName: com-cyt-zmmportalproveedoresordenescompr-xsuaa-srv
+          ServiceKeyName: com-cyt-zmmportalproveedoresordenescompras2021-uaa-key
+          sap.cloud.service: com-cyt-zmmportalproveedoresordenescompras2021111116
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+- name: com-cyt-zmmportalproveedoresordenescom-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: com-cyt-zmmportalproveedoresordenesc-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comcytzmmportalproveedoresordenescompras2021111116.zip
+      name: comcytzmmportalproveedoresordenescompras2021111116
+      target-path: resources/
+- name: comcytzmmportalproveedoresordenescompras2021111116
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: com-cyt-zmmportalproveedoresordenescompr-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: com-cyt-zmmportalproveedoresordenescompr-dest-srv
+    service-plan: lite
+- name: com-cyt-zmmportalproveedoresordenescompras2021-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: com-cyt-zmmportalproveedoresordenescompr-xsuaa-srv
+    service-plan: application
+- name: com-cyt-zmmportalproveedoresordenesc-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: com-cyt-zmmportalproveedoresordenescompr-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
